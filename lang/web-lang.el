@@ -38,8 +38,6 @@
          ("\\.[agj]sp\\'"    . web-mode)
          ("\\.as[cp]x\\'"    . web-mode)
          ("\\.djhtml\\'"     . web-mode)
-         ("\\.jsx\\'"        . web-mode)
-         ("\\.tsx\\'"        . web-mode)
          ("\\.html?\\'"      . web-mode))
   :custom
   (web-mode-markup-indent-offset 2)

@@ -4,16 +4,42 @@
 ;; ==========================================
 ;; 1. TREE-SITTER SETUP
 ;; ==========================================
-(setq treesit-extra-load-path '("~/.config/emacs/tree-sitter/"))
+(setq treesit-extra-load-path (list (expand-file-name "tree-sitter" user-emacs-directory)))
 
 (setq treesit-language-source-alist
-      '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src")
-        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src")))
+      '((typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+        (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+        
+        ;; Web & Config Languages
+        (html "https://github.com/tree-sitter/tree-sitter-html")
+        (css "https://github.com/tree-sitter/tree-sitter-css")
+        (json "https://github.com/tree-sitter/tree-sitter-json")
+        (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+        (toml "https://github.com/tree-sitter/tree-sitter-toml")
+        
+        ;; Backend & Scripting Languages
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (go "https://github.com/tree-sitter/tree-sitter-go")
+        (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+        (rust "https://github.com/tree-sitter/tree-sitter-rust")
+        (bash "https://github.com/tree-sitter/tree-sitter-bash")
+        (c "https://github.com/tree-sitter/tree-sitter-c")
+        (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+        (java "https://github.com/tree-sitter/tree-sitter-java")
+        (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+        (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+        
+        ;; Devops / Ops
+        (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+        (cmake "https://github.com/uyha/tree-sitter-cmake")
+        (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split" "tree-sitter-markdown/src")
+        (markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split" "tree-sitter-markdown-inline/src")))
+
 
 (use-package treesit-auto
   :ensure t
   :custom
-  (treesit-auto-install 'prompt)
+  (treesit-auto-install nil)
   :config
   (treesit-auto-add-to-auto-mode-alist)
   (global-treesit-auto-mode))
@@ -45,19 +71,6 @@
   :commands (lsp lsp-deferred)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((typescript-ts-mode . lsp-deferred)
-         (tsx-ts-mode        . lsp-deferred)
-         (go-mode            . lsp-deferred)
-         (go-ts-mode         . lsp-deferred)  
-         (rust-mode          . lsp-deferred)
-         (rust-ts-mode       . lsp-deferred)
-         (lua-mode          . lsp-deferred)
-         (web-mode          . lsp-deferred)
-         (markdown-mode          . lsp-deferred)
-         (json-ts-mode          . lsp-deferred)
-         (yaml-ts-mode          . lsp-deferred)
-         (dockerfile-ts-mode  . lsp-deferred)
-         )
   :config
   (setq
    lsp-auto-guess-root t
