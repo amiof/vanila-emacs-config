@@ -23,11 +23,11 @@
 ;; theme
 (use-package doom-themes
   :config
-  (load-theme 'doom-gruvbox t))
+  (load-theme 'doom-moonlight t))
 
 
 ;; line number
-(global-display-line-numbers-mode 1)
+; (global-display-line-numbers-mode 1)
 
 (add-to-list 'default-frame-alist '(width . 130))
 (add-to-list 'default-frame-alist '(height . 40))
@@ -178,6 +178,7 @@
 
 ;; pair
 (electric-pair-mode 1)
+
 ;; smooth scrolling
-(pixel-scroll-precision-mode 1)
+; (pixel-scroll-precision-mode 1)
 (provide 'ui-config)

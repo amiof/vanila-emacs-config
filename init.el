@@ -10,20 +10,20 @@
 
 
 (require 'bootstrap-config)
+(require 'core-config)
+(create-or-load-custom-file)
 (require 'ui-config)
 (require 'evil-config)
 (require 'completion-config)
 (require 'keybindings-config)
 (require 'tools-config)
 (require 'lsp-config)
-(require 'core-config)
-(create-or-load-custom-file)
 (require 'snippet-config)
 (require 'modeline-config)
-(require 'neoscroll)
+; (require 'neoscroll)
 
 
-(add-hook 'emacs-startup-hook
-          (lambda ()
-            (neoscroll-mode 1)))
+; (add-hook 'emacs-startup-hook
+;           (lambda ()
+;             (neoscroll-mode 1)))
 

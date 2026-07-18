@@ -4,7 +4,8 @@
 ;
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (add-to-list 'load-path
-             "~/.config/emacs/lang")
+             (expand-file-name "lang" user-emacs-directory))
+
 
 (defconst my/custom-file-template
   ";;; custom.el --- Your Chadmacs overrides -*- no-byte-compile: t; lexical-binding: t; -*-
