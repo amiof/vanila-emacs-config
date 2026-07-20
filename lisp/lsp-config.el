@@ -54,6 +54,7 @@
   (global-flycheck-mode)
   :config
   ;; Completely disable the buggy built-in cargo and rust checkers
+  (setq flycheck-indication-mode 'right-margin)
   (setq-default flycheck-disabled-checkers '(rust-cargo rust)))
 
 ;; If you want flycheck-rust integration, install it properly:

@@ -26,5 +26,7 @@
               (flymake-mode -1)
               (flycheck-mode 1))))
 
+(add-hook 'rust-ts-mode-hook #'lsp-deferred)
+
 (provide 'rust-lang)
 ;;; rust-lang.el ends here

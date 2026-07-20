@@ -3,7 +3,6 @@ eln-cache/
 elpaca/
 friendly-snippets/
 transient/
-tree-sitter/
 .local/
 .cache/
 .lsp-session-v1

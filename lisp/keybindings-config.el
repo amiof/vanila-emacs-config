@@ -5,6 +5,60 @@
   (which-key-mode))
 
 
+;; close all buffer and window auto
+(defun my/smart-close (&optional force)
+  "Smart close: ignores minibuffer and side windows (treemacs, etc.)."
+  (interactive "P")
+  (cond
+   ;; Minibuffer is active → just abort it
+   ((minibufferp)
+    (abort-recursive-edit))
+
+   (t
+    (let* (;; Get all windows EXCEPT minibuffer and side windows (treemacs, etc.)
+           (real-wins (cl-remove-if
+                       (lambda (w)
+                         (or (window-parameter w 'window-side)    ;; treemacs, etc.
+                             (window-parameter w 'no-delete-other-windows)))
+                       (window-list)))
+           (count (length real-wins)))
+      (cond
+       ;; Multiple real windows → close this one
+       ((> count 1)
+        (delete-window))
+
+       ;; Single window, popup/special buffer → bury it
+       ((and (not (buffer-file-name))
+             (not (eq major-mode 'dired-mode)))
+        (quit-window t))
+
+       ;; Single window, real file → kill buffer
+       (t
+        (when (and (buffer-modified-p) (not force))
+          (save-buffer))
+        (kill-current-buffer)))))))
+
+(global-set-key (kbd "C-c k") #'my/smart-close)
+
+
+;; next/previous buffer فقط فایل‌های واقعی
+(defun my/real-buffer-p (buf)
+  (and (buffer-file-name buf)
+       (not (string-prefix-p "*" (buffer-name buf)))))
+
+(set-frame-parameter nil 'buffer-predicate #'my/real-buffer-p)
+
+(setq read-buffer-completion-ignore-case t)
+
+(defun my/switch-to-real-buffer ()
+  (interactive)
+  (let ((buffers (cl-remove-if-not #'my/real-buffer-p (buffer-list))))
+    (switch-to-buffer (completing-read "Buffer: "
+                                       (mapcar #'buffer-name buffers)))))
+
+; (global-set-key (kbd "C-x b") #'my/switch-to-real-buffer)
+
+
 (use-package general
   :demand t
   :config
@@ -15,22 +69,24 @@
     :prefix "SPC"
     :global-prefix "C-SPC")
 
+  (my-leader-def
+    "SPC" 'consult-buffer
+    )
 
   ;; Files
-  (my-leader-def
+ (my-leader-def
     "f f" 'find-file
+    "f n"  'project-find-file
+    "f g " 'consult-ripgrep
     "f r" 'consult-recent-file
     "f s" 'save-buffer)
 
 
   ;; Buffers
   (my-leader-def
-    "b b" 'consult-buffer
-    "b d" 'kill-current-buffer)
+    "b b" #'my/switch-to-real-buffer
+    "b d" #'my/smart-close)
 
-  (my-leader-def
-    "SPC" 'consult-buffer
-    )
 
   ;; Search
   (my-leader-def
@@ -56,17 +112,17 @@
     "]"   'evil-jump-forward
     )
 
-(my-leader-def
-    "p t" 'popper-toggle
-    "p c" 'popper-cycle
-    "p k" 'popper-toggle-type)
+;; (my-leader-def
+;;     "p t" 'popper-toggle
+;;     "p c" 'popper-cycle
+;;     "p k" 'popper-toggle-type)
 
 (my-leader-def
     "o p" 'treemacs
     "o f" 'treemacs-find-file)
 
   ;; Help
-  (my-leader-def
+(my-leader-def
     ; "h f" 'describe-function
     ; "h v" 'describe-variable
     ; "h k" 'describe-key
@@ -75,12 +131,21 @@
     "h k" 'helpful-key
     "h c" 'helpful-command)
 
-  (my-leader-def
-    "w d" 'delete-window
+
+(my-leader-def
+  "w d" 'delete-window
   "w h"'evil-window-left
   "w j" 'evil-window-down
   "w k" 'evil-window-up
   "w l" 'evil-window-right
+  "w w"  (lambda () (interactive) (save-some-buffers t))
+  "w c" 'save-buffer
+  "w q" (lambda () (interactive) (save-buffers-kill-terminal t))
+    )
+
+  
+  (my-leader-def
+    "q q" 'kill-emacs
     )
 
   ;; Terminal
@@ -110,10 +175,10 @@
   (define-key evil-normal-state-map (kbd "L") #'evil-end-of-line)
   (define-key evil-normal-state-map (kbd "f") #'avy-goto-char)
   (define-key evil-normal-state-map (kbd "t") #'avy-goto-line)
-;; 'm' goes to the next tab
-  (define-key evil-normal-state-map (kbd "m") #'centaur-tabs-forward)
-  ;; 'M' goes to the previous tab
-  (define-key evil-normal-state-map (kbd "M") #'centaur-tabs-backward)
+  (define-key evil-normal-state-map (kbd "g c c") #'comment-line)
+
+  (define-key evil-normal-state-map (kbd "m") #'next-buffer)
+  (define-key evil-normal-state-map (kbd "M") #'previous-buffer)
 
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)

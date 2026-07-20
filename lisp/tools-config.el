@@ -61,7 +61,9 @@
         treemacs-width 35
         treemacs-position 'left
         treemacs-is-never-other-window t)
-  (treemacs-follow-mode t)
+  (treemacs-follow-mode 1)  
+  (treemacs-project-follow-mode 1)
+  (treemacs-resize-icons 22)
   (treemacs-filewatch-mode t))
 
 ;; 2. Evil mode integration
@@ -86,33 +88,33 @@
   :config
   (global-display-line-numbers-mode t))
 
-(use-package popper
-  :ensure t
-  ;; `M-`' is already bound to `other-frame' in chadmacs-core, so popper-cycle
-  ;; gets `C-M-<` instead of the upstream default.
-  :bind (("C-`"   . popper-toggle)
-         ("C-M-<" . popper-cycle)
-         ("C-M-`" . popper-toggle-type))
-  :init
-  (setq popper-reference-buffers
-        '("\\*Messages\\*"
-          "Output\\*$"
-          "\\*Async Shell Command\\*"
-          "\\*compilation\\*"
-          "\\*Warnings\\*"
-          "\\*Backtrace\\*"
-          "\\*eldoc\\*"
-          "\\*ghostel"          ; matches *ghostel*, *ghostel-compile*, *ghostel: DIR*
-          "\\*ts-ls\\*"
-          "\\*lsp-log\\*"
-          help-mode
-          helpful-mode
-          compilation-mode
-          eshell-mode
-          shell-mode
-          ghostel-mode))
-  (popper-mode 1)
-  (popper-echo-mode 1))
+;; (use-package popper
+;;   :ensure t
+;;   ;; `M-`' is already bound to `other-frame' in chadmacs-core, so popper-cycle
+;;   ;; gets `C-M-<` instead of the upstream default.
+;;   :bind (("C-`"   . popper-toggle)
+;;          ("C-M-<" . popper-cycle)
+;;          ("C-M-`" . popper-toggle-type))
+;;   :init
+;;   (setq popper-reference-buffers
+;;         '("\\*Messages\\*"
+;;           "Output\\*$"
+;;           "\\*Async Shell Command\\*"
+;;           "\\*compilation\\*"
+;;           "\\*Warnings\\*"
+;;           "\\*Backtrace\\*"
+;;           "\\*eldoc\\*"
+;;           "\\*ghostel"          ; matches *ghostel*, *ghostel-compile*, *ghostel: DIR*
+;;           "\\*ts-ls\\*"
+;;           "\\*lsp-log\\*"
+;;           help-mode
+;;           helpful-mode
+;;           compilation-mode
+;;           eshell-mode
+;;           shell-mode
+;;           ghostel-mode))
+;;   (popper-mode 1)
+;;   (popper-echo-mode 1))
 
 
 
@@ -124,7 +126,9 @@
   :config
   ;; Enable on-the-fly updates as you type
   (diff-hl-flydiff-mode 1)
-
+  (setq diff-hl-side 'left)
+  (setq-default left-fringe-width 3)
+  (setq-default right-fringe-width 8)
   ;; Integration with Magit (reloads gutter when you commit/stage in Magit)
   (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
   (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
