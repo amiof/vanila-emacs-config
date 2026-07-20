@@ -20,10 +20,10 @@
 (require 'lsp-config)
 (require 'snippet-config)
 (require 'modeline-config)
-; (require 'neoscroll)
+(require 'neoscroll)
 
 
-; (add-hook 'emacs-startup-hook
-;           (lambda ()
-;             (neoscroll-mode 1)))
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (neoscroll-mode 1)))
 
