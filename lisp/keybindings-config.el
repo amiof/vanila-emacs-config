@@ -98,6 +98,13 @@
   (my-leader-def
     "g g" 'magit-status)
 
+  ;;bookmarks
+(my-leader-def
+    "m s" 'bookmark-set
+    "m d" 'bookmark-delete
+    "m l" 'bookmark-bmenu-list
+    "m j" 'bookmark-jump
+    )
 
   ;; LSP / Code
   (my-leader-def
@@ -107,7 +114,6 @@
     "c r" 'lsp-find-references
     "r r" 'lsp-rename
     "c y" 'flycheck-copy-errors-as-kill
-    "c y" 'flycheck-copy-errors-as-kill 
     "["   'evil-jump-backward         
     "]"   'evil-jump-forward
     )
@@ -153,11 +159,11 @@
     "t t" 'vterm))
 
 
-(with-eval-after-load 'lsp-ui
-  (evil-define-key 'normal lsp-ui-mode-map
-    (kbd "K") #'lsp-ui-doc-show
-    (kbd "F") #'lsp-ui-doc-focus-frame
-    (kbd "q") #'lsp-ui-doc-hide))
+;; (with-eval-after-load 'lsp-ui
+;;   (evil-define-key 'normal lsp-ui-mode-map
+;;     (kbd "K") #'lsp-ui-doc-show
+;;     (kbd "F") #'lsp-ui-doc-focus-frame
+;;     (kbd "q") #'lsp-ui-doc-hide))
 
 
 
@@ -216,27 +222,27 @@
 ;
 ;
 
-(with-eval-after-load 'centaur-tabs
-  ;; 1. Define the hiding rules
-  (defun my-centaur-tabs-hide-filter (buffer)
-    "Filter out unwanted log and process buffers from centaur-tabs."
-    (let ((name (buffer-name buffer)))
-      (or
-       (string-prefix-p "*Messages*" name)
-       (string-prefix-p "*lsp-log" name)
-       (string-suffix-p "::stderr*" name)
-       (string-prefix-p "*Help*" name)
-       (string-prefix-p "*Compile-Log*" name)
-       (string-prefix-p "*epc" name)
-       ;; Added: Hide any other buffer starting with *, except *scratch*
-       (and (string-prefix-p "*" name)
-            (not (string-equal "*scratch*" name))))))
+;; (with-eval-after-load 'centaur-tabs
+;;   ;; 1. Define the hiding rules
+;;   (defun my-centaur-tabs-hide-filter (buffer)
+;;     "Filter out unwanted log and process buffers from centaur-tabs."
+;;     (let ((name (buffer-name buffer)))
+;;       (or
+;;        (string-prefix-p "*Messages*" name)
+;;        (string-prefix-p "*lsp-log" name)
+;;        (string-suffix-p "::stderr*" name)
+;;        (string-prefix-p "*Help*" name)
+;;        (string-prefix-p "*Compile-Log*" name)
+;;        (string-prefix-p "*epc" name)
+;;        ;; Added: Hide any other buffer starting with *, except *scratch*
+;;        (and (string-prefix-p "*" name)
+;;             (not (string-equal "*scratch*" name))))))
 
-  ;; 2. Assign it to the correct centaur-tabs hook variable
-  (setq centaur-tabs-hide-tab-function #'my-centaur-tabs-hide-filter)
+;;   ;; 2. Assign it to the correct centaur-tabs hook variable
+;;   (setq centaur-tabs-hide-tab-function #'my-centaur-tabs-hide-filter)
   
-  ;; 3. Force centaur-tabs to clear its cache and rebuild your tabs
-  (centaur-tabs-display-update))
+;;   ;; 3. Force centaur-tabs to clear its cache and rebuild your tabs
+;;   (centaur-tabs-display-update))
 
 (provide 'keybindings-config)
 ;;; keybindings-config.el ends here

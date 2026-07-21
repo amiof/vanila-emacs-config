@@ -7,3 +7,6 @@ transient/
 .cache/
 .lsp-session-v1
 elpa/
+ projectile-frecency.eld
+projects 
+recentf

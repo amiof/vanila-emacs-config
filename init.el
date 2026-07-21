@@ -12,15 +12,17 @@
 (require 'bootstrap-config)
 (require 'core-config)
 (create-or-load-custom-file)
-(require 'ui-config)
-(require 'evil-config)
-(require 'completion-config)
-(require 'keybindings-config)
-(require 'tools-config)
 (require 'lsp-config)
+(require 'evil-config)
+(require 'utils-config)
+(require 'tools-config)
+(require 'keybindings-config)
+(require 'ui-config)
+(require 'completion-config)
 (require 'snippet-config)
 (require 'modeline-config)
 (require 'neoscroll)
+
 
 
 (add-hook 'emacs-startup-hook

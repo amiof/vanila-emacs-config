@@ -44,7 +44,7 @@
   (treesit-auto-add-to-auto-mode-alist)
   (global-treesit-auto-mode))
 
-
+ (setq treesit-font-lock-level 4)
 ;; ==========================================
 ;; 2. FLYCHECK SETUP
 ;; ==========================================
@@ -106,16 +106,40 @@
    lsp-ui-doc-show-with-cursor nil
    lsp-ui-doc-show-with-mouse t
    lsp-ui-doc-position 'at-point
+   lsp-ui-doc-use-childframe t
    lsp-ui-doc-max-width 150
    lsp-ui-doc-max-height 40
+   lsp-ui-doc-delay 0.2
 
    lsp-ui-sideline-enable t
-   lsp-ui-sideline-show-hover t
+   lsp-ui-sideline-show-hover t  
    lsp-ui-sideline-show-diagnostics t
    lsp-ui-sideline-show-code-actions t
 
    lsp-ui-peek-enable t
-   lsp-ui-imenu-enable t))
+   lsp-ui-imenu-enable t)
+
+  ;; کلیدهای داکیومنت
+  (evil-define-key 'normal lsp-ui-mode-map
+    (kbd "F") #'lsp-ui-doc-focus-frame
+    (kbd "q") #'lsp-ui-doc-hide))
+
+;; کلید K در مپ اصلی LSP
+(with-eval-after-load 'lsp-mode
+  (evil-define-key 'normal lsp-mode-map
+    (kbd "K") #'lsp-ui-doc-show))
+
+;; هوک طلایی: بیدار کردن lsp-ui-doc با تعویض مود خودکار
+(add-hook 'lsp-ui-mode-hook
+          (lambda ()
+            (run-with-idle-timer 0.3 nil
+                                 (lambda ()
+                                   (when (and (bound-and-true-p evil-mode)
+                                              (eq evil-state 'normal)
+                                              (not (minibufferp)))
+                                     (evil-insert-state)
+                                     (evil-normal-state)
+                                     (redisplay t))))))
 
 
 ;; ==========================================

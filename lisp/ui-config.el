@@ -145,26 +145,27 @@
   ;; 1. Safely define our buffer exclusion rules
   (defun my-centaur-tabs-hide-filter (buffer)
     "Cleanly hide tabs in side windows, child frames, popups, and logs."
-    (let ((name (buffer-name buffer)))
+   (let ((name (buffer-name buffer)))
       (or
-       ;; Hide in dedicated side-windows/popups
-       (window-dedicated-p (selected-window))
-       
-       ;; Absolutely hide tabs if we are inside a child-frame (like lsp-ui-doc)
-       (and (fboundp 'frame-parent) (frame-parent (selected-frame)))
-       
-       ;; Hide inside lsp-ui-doc or lsp-ui-imenu buffers
-       (string-prefix-p " *lsp-ui" name)
-       
-       ;; Hide common terminals and popups
-       (derived-mode-p 'vterm-mode)
-       (derived-mode-p 'eshell-mode)
-       (derived-mode-p 'shell-mode)
-       
-       ;; Hide log and process buffers
-       (string-prefix-p "*Messages*" name)
-       (string-prefix-p "*lsp-log" name)
-       (string-suffix-p "::stderr*" name))))
+       ;; 1. مخفی کردن در child-frameها (مثل lsp-ui-doc)
+       (when (and (fboundp 'frame-parent)
+                  (frame-parent (selected-frame)))
+         t)   ; اگر پنجرهٔ جاری child-frame باشد، تب را مخفی کن
+
+       ;; 2. مخفی کردن بر اساس نام بافر (مطمئن‌ترین روش)
+       (string-prefix-p " *lsp-ui" name)          ; بافرهای lsp-ui (شامل doc)
+       (string-prefix-p "*lsp-ui-doc" name)       ; دقیقاً نام بافر doc
+       (string-prefix-p "*lsp-log" name)          ; لاگ LSP
+       (string-prefix-p "*Messages*" name)        ; پیام‌های Emacs
+       (string-prefix-p " *lv" name)              ; بافرهای lv (برای نمایش doc)
+       (string-suffix-p "::stderr*" name)         ; خطاهای فرآیند
+
+       ;; 3. مخفی کردن در حالت‌های خاص (ترمینال، شل، ...)
+       (with-current-buffer buffer
+         (or (derived-mode-p 'vterm-mode)
+             (derived-mode-p 'eshell-mode)
+             (derived-mode-p 'dashboard-mode)
+             (derived-mode-p 'shell-mode))))))
 
   ;; 2. Apply the filter function to centaur-tabs
   (setq centaur-tabs-hide-tab-function #'my-centaur-tabs-hide-filter)
