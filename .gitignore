@@ -10,3 +10,6 @@ elpa/
  projectile-frecency.eld
 projects 
 recentf
+*~
+\#*\#
+.\#*

@@ -141,8 +141,8 @@
     
     ;; Leader bindings to show/revert changes (e.g., Space g r to revert)
     ;; Replace 'general' or 'evil-leader' syntax below with whatever you use:
-     (evil-define-key 'normal 'global (kbd "SPC g s") 'diff-hl-show-hunk)
-     (evil-define-key 'normal 'global (kbd "SPC g r") 'diff-hl-revert-hunk)
+     ; (evil-define-key 'normal 'global (kbd "SPC g s") 'diff-hl-show-hunk)
+     ; (evil-define-key 'normal 'global (kbd "SPC g r") 'diff-hl-revert-hunk)
     ))
 
 
@@ -174,6 +174,23 @@
   ;; فعال‌سازی
   (dashboard-setup-startup-hook))
 
+
+
+;; lsp-tailwindcss that is in local lsp-mode
+
+(with-eval-after-load 'lsp-mode
+  (require 'lsp-tailwindcss nil t)
+
+  ;; اگر تابع setup یا enable خاصی داشت
+  (when (fboundp #'lsp-tailwindcss-setup)
+    (lsp-tailwindcss-setup)))
+
+
+;; for use consult for gD in go to refreance
+(use-package xref
+  :custom
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref))
 
 
 (provide 'tools-config)

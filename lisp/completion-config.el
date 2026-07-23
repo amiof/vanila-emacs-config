@@ -3,7 +3,13 @@
 ;; Vertico - minibuffer completion UI
 (use-package vertico
   :init
-  (vertico-mode))
+  (vertico-mode)
+  :bind
+  (:map vertico-map
+        ("TAB" . vertico-next)
+        ("<tab>" . vertico-next)
+        ("S-TAB" . vertico-previous)
+	("<backtab>" . vertico-previous)))
 
 
 ;; Better matching
@@ -22,7 +28,11 @@
 
 
 ;; Search and navigation commands
-(use-package consult)
+(use-package consult
+  :bind
+  (:map consult-narrow-map
+        ("TAB" . consult-narrow-help)))
+
 (with-eval-after-load 'consult
   ;; Add patterns to the ignore filter
   (let ((ignored-buffers '( "^\\*Messages\\*$"
@@ -40,10 +50,16 @@
 (use-package corfu
   :ensure t
   :init
-  (global-corfu-mode) :bind
+  (global-corfu-mode)
+  :bind
   ;; Bind C-SPC (and C-@ as a fallback) to manually force the completion popup
   (("C-SPC" . completion-at-point)
-   ("C-@"   . completion-at-point))
+   ("C-@"   . completion-at-point)
+   (:map corfu-map
+         ("TAB" . corfu-next)
+         ("<tab>" . corfu-next)
+         ("S-TAB" . corfu-previous)
+         ("<backtab>" . corfu-previous)))
   :custom
   (corfu-auto t)
   (corfu-cycle t)

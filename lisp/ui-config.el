@@ -21,9 +21,10 @@
 (use-package kanagawa-themes)
 
 ;; theme
+(use-package tokyo-night)
 (use-package doom-themes
   :config
-  (load-theme 'doom-moonlight t))
+  (load-theme 'tokyo-night-moon t))
 
 
 ;; line number
@@ -114,13 +115,20 @@
 
 
 
-(use-package golden-ratio
-  :ensure t
- )
+; (use-package golden-ratio
+;   :ensure t
+;   :config
+;   (golden-ratio-mode 1)
+;
+;   ;; Check if ANY ediff session is active globally
+;   (defun my/golden-ratio-inhibit-ediff ()
+;     "Disable golden-ratio if ediff is active."
+;     (bound-and-true-p ediff-this-buffer-ediff-sessions))
+;
+;   (add-to-list 'golden-ratio-inhibit-functions 'my/golden-ratio-inhibit-ediff))
 
-(with-eval-after-load 'golden-ratio
-(require 'golden-ratio)
-(golden-ratio-mode 1))
+
+
 
 (use-package centaur-tabs
   :ensure t 
@@ -180,6 +188,21 @@
 ;; pair
 (electric-pair-mode 1)
 
+
+;;add fold mode to code 
+(add-hook 'prog-mode-hook 'hs-minor-mode)
+
 ;; smooth scrolling
 ; (pixel-scroll-precision-mode 1)
+
+;; for add indent bar in codes
+(use-package indent-bars
+  :ensure t
+  :hook
+  ((prog-mode . indent-bars-mode)))
+
+(setq indent-bars-width-frac 0.1)
+(setq indent-bars-color '(highlight :face-bg t :blend 0.15))
+(setq indent-bars-pattern ".")
+
 (provide 'ui-config)

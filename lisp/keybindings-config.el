@@ -96,7 +96,13 @@
 
   ;; Git
   (my-leader-def
-    "g g" 'magit-status)
+    "g g" 'magit-status
+    "g s" 'diff-hl-show-hunk
+    "g r" 'diff-hl-revert-hunk
+    "g f" 'my/ediff-changed-files
+    "g e" 'my/ediff-with-git-rev 
+    )
+
 
   ;;bookmarks
 (my-leader-def
@@ -125,7 +131,8 @@
 
 (my-leader-def
     "o p" 'treemacs
-    "o f" 'treemacs-find-file)
+    "o f" 'treemacs-find-file
+    "o t" 'consult-theme)
 
   ;; Help
 (my-leader-def
@@ -181,10 +188,12 @@
   (define-key evil-normal-state-map (kbd "L") #'evil-end-of-line)
   (define-key evil-normal-state-map (kbd "f") #'avy-goto-char)
   (define-key evil-normal-state-map (kbd "t") #'avy-goto-line)
+  (define-key evil-normal-state-map (kbd "g D") #'lsp-find-references)
   (define-key evil-normal-state-map (kbd "g c c") #'comment-line)
 
   (define-key evil-normal-state-map (kbd "m") #'next-buffer)
   (define-key evil-normal-state-map (kbd "M") #'previous-buffer)
+  (define-key evil-normal-state-map (kbd "|") #'split-window-right)
 
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)

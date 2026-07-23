@@ -16,13 +16,13 @@
 (require 'evil-config)
 (require 'utils-config)
 (require 'tools-config)
-(require 'keybindings-config)
 (require 'ui-config)
+(require 'git-tools-config)
 (require 'completion-config)
 (require 'snippet-config)
 (require 'modeline-config)
+(require 'keybindings-config)
 (require 'neoscroll)
-
 
 
 (add-hook 'emacs-startup-hook
