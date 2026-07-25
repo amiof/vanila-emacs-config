@@ -21,4 +21,22 @@
 
 (global-set-key (kbd "C-c b") #'my/toggle-transparency-bg)
 
+
+
+(defun my/lsp-eslint-fix ()
+  "Run ESLint Fix All."
+  (interactive)
+  (lsp-execute-code-action-by-kind "source.fixAll.eslint"))
+
+
+(defun my/treemacs-toggle-focus ()
+  "Toggle cursor focus between Treemacs and last used window."
+  (interactive)
+  (if (eq (treemacs-get-local-window) (selected-window))
+      (select-window (get-mru-window nil nil t))
+    (treemacs-select-window)))
+
+
+
+
 (provide 'utils-config)

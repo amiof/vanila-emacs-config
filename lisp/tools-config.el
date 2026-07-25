@@ -141,8 +141,8 @@
     
     ;; Leader bindings to show/revert changes (e.g., Space g r to revert)
     ;; Replace 'general' or 'evil-leader' syntax below with whatever you use:
-     ; (evil-define-key 'normal 'global (kbd "SPC g s") 'diff-hl-show-hunk)
-     ; (evil-define-key 'normal 'global (kbd "SPC g r") 'diff-hl-revert-hunk)
+					; (evil-define-key 'normal 'global (kbd "SPC g s") 'diff-hl-show-hunk)
+					; (evil-define-key 'normal 'global (kbd "SPC g r") 'diff-hl-revert-hunk)
     ))
 
 
@@ -152,8 +152,8 @@
   ;; لوگو (فعلاً لوگوی پیش‌فرض Emacs - بعداً عوضش کن)
   ;; (setq dashboard-banner-logo-title "Welcom")
   ;; (setq dashboard-startup-banner 'official)  ;; لوگوی رسمی Emacs
-   ;; (setq dashboard-startup-banner "/home/amir/.config/emacs/rz3.png")
-(setq dashboard-startup-banner (expand-file-name "assets/logo.png" user-emacs-directory))
+  ;; (setq dashboard-startup-banner "/home/amir/.config/emacs/rz3.png")
+  (setq dashboard-startup-banner (expand-file-name "assets/logo.png" user-emacs-directory))
 
   ;; آیتم‌های صفحه شروع
   (setq dashboard-items

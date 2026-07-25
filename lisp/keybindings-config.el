@@ -56,7 +56,7 @@
     (switch-to-buffer (completing-read "Buffer: "
                                        (mapcar #'buffer-name buffers)))))
 
-; (global-set-key (kbd "C-x b") #'my/switch-to-real-buffer)
+;; (global-set-key (kbd "C-x b") #'my/switch-to-real-buffer)
 
 
 (use-package general
@@ -74,11 +74,13 @@
     )
 
   ;; Files
- (my-leader-def
+  (my-leader-def
     "f f" 'find-file
     "f n"  'project-find-file
     "f g " 'consult-ripgrep
     "f r" 'consult-recent-file
+    "f l"  #'my/lsp-eslint-fix
+    "f b" 'lsp-biome-fix-all
     "f s" 'save-buffer)
 
 
@@ -105,7 +107,7 @@
 
 
   ;;bookmarks
-(my-leader-def
+  (my-leader-def
     "m s" 'bookmark-set
     "m d" 'bookmark-delete
     "m l" 'bookmark-bmenu-list
@@ -124,38 +126,41 @@
     "]"   'evil-jump-forward
     )
 
-;; (my-leader-def
-;;     "p t" 'popper-toggle
-;;     "p c" 'popper-cycle
-;;     "p k" 'popper-toggle-type)
+  ;; (my-leader-def
+  ;;     "p t" 'popper-toggle
+  ;;     "p c" 'popper-cycle
+  ;;     "p k" 'popper-toggle-type)
 
-(my-leader-def
+  (my-leader-def
     "o p" 'treemacs
     "o f" 'treemacs-find-file
     "o t" 'consult-theme)
 
   ;; Help
-(my-leader-def
-    ; "h f" 'describe-function
-    ; "h v" 'describe-variable
-    ; "h k" 'describe-key
+  (my-leader-def
+    ;; "h f" 'describe-function
+    ;;"h v" 'describe-variable
+    ;;"h k" 'describe-key
     "h f" 'helpful-callable
     "h v" 'helpful-variable
     "h k" 'helpful-key
     "h c" 'helpful-command)
 
 
-(my-leader-def
-  "w d" 'delete-window
-  "w h"'evil-window-left
-  "w j" 'evil-window-down
-  "w k" 'evil-window-up
-  "w l" 'evil-window-right
-  "w w"  (lambda () (interactive) (save-some-buffers t))
-  "w c" 'save-buffer
-  "w q" (lambda () (interactive) (save-buffers-kill-terminal t))
+  (my-leader-def
+    "w d" 'delete-window
+    "w h"'evil-window-left
+    "w j" 'evil-window-down
+    "w k" 'evil-window-up
+    "w l" 'evil-window-right
+    "w w"  (lambda () (interactive) (save-some-buffers t))
+    "w c" 'save-buffer
+    "w q" (lambda () (interactive) (save-buffers-kill-terminal t))
     )
 
+  (my-leader-def
+    "j" #'my/treemacs-toggle-focus
+    )
   
   (my-leader-def
     "q q" 'kill-emacs
@@ -183,7 +188,7 @@
   (evil-escape-mode 1))
 
 (with-eval-after-load 'evil
- ; (evil-set-leader 'normal (kbd "SPC"))
+					; (evil-set-leader 'normal (kbd "SPC"))
   (define-key evil-normal-state-map (kbd "H") #'evil-first-non-blank)
   (define-key evil-normal-state-map (kbd "L") #'evil-end-of-line)
   (define-key evil-normal-state-map (kbd "f") #'avy-goto-char)
@@ -204,32 +209,32 @@
 
 
 ;; dont show tab start with * 
-; (with-eval-after-load 'centaur-tabs
-;   (defun centaur-tabs-hide-tab (buffer)
-;     "Do not show internal, log, and process buffers in centaur-tabs."
-;     (let ((name (buffer-name buffer)))
-;       (or
-;        ;; Default: Hide buffers in dedicated windows
-;        (window-dedicated-p (selected-window))
-;
-;        ;; Hide specific unwanted buffers
-;        (string-prefix-p "*Messages*" name)
-;        (string-prefix-p "*lsp-log*" name)
-;        (string-suffix-p "*::stderr*" name)
-;        (string-prefix-p "*Help*" name)
-;        (string-prefix-p "*Compile-Log*" name)
-;        (string-prefix-p "*ts-ls*" name)
-;        (string-prefix-p "*Buffer List*" name)
-;        (string-prefix-p "*scratch*" name)
-;        (string-prefix-p "*ts-ls::stderr*" name)
-;
-;        ;; Optional: Hide ALL star buffers (uncomment the line below if you want this)
-;        ; (string-prefix-p "*" name)
-;        ))))
-;
-;
-;
-;
+;; (with-eval-after-load 'centaur-tabs
+;;   (defun centaur-tabs-hide-tab (buffer)
+;;     "Do not show internal, log, and process buffers in centaur-tabs."
+;;     (let ((name (buffer-name buffer)))
+;;       (or
+;;        ;; Default: Hide buffers in dedicated windows
+;;        (window-dedicated-p (selected-window))
+;;
+;;        ;; Hide specific unwanted buffers
+;;        (string-prefix-p "*Messages*" name)
+;;        (string-prefix-p "*lsp-log*" name)
+;;        (string-suffix-p "*::stderr*" name)
+;;        (string-prefix-p "*Help*" name)
+;;        (string-prefix-p "*Compile-Log*" name)
+;;        (string-prefix-p "*ts-ls*" name)
+;;        (string-prefix-p "*Buffer List*" name)
+;;        (string-prefix-p "*scratch*" name)
+;;        (string-prefix-p "*ts-ls::stderr*" name)
+;;
+;;        ;; Optional: Hide ALL star buffers (uncomment the line below if you want this)
+;;        ; (string-prefix-p "*" name)
+;;        ))))
+;;
+;;
+;;
+;;
 
 ;; (with-eval-after-load 'centaur-tabs
 ;;   ;; 1. Define the hiding rules
@@ -249,7 +254,7 @@
 
 ;;   ;; 2. Assign it to the correct centaur-tabs hook variable
 ;;   (setq centaur-tabs-hide-tab-function #'my-centaur-tabs-hide-filter)
-  
+
 ;;   ;; 3. Force centaur-tabs to clear its cache and rebuild your tabs
 ;;   (centaur-tabs-display-update))
 

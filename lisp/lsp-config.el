@@ -44,7 +44,7 @@
   (treesit-auto-add-to-auto-mode-alist)
   (global-treesit-auto-mode))
 
- (setq treesit-font-lock-level 4)
+(setq treesit-font-lock-level 4)
 ;; ==========================================
 ;; 2. FLYCHECK SETUP
 ;; ==========================================
@@ -142,23 +142,35 @@
                                      (redisplay t))))))
 
 
+
+(use-package lsp-biome
+  :vc (:url "https://github.com/cxa/lsp-biome" :rev :newest)
+  :after lsp-mode
+  :preface
+  (defun my/lsp-biome-active-hook ()
+    (setq-local apheleia-formatter '(biome)))
+
+  :config
+  (add-hook 'lsp-biome-active-hook #'my/lsp-biome-active-hook))
+
+
 ;; ==========================================
 ;; 4. LANGUAGE MODES
 ;; ==========================================
 
 ;; TypeScript & TSX
-; (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
 
 ;; Go
-; (use-package go-mode
-;   :ensure t
-;   :mode "\\.go\\'")
+;; (use-package go-mode
+;;   :ensure t
+;;   :mode "\\.go\\'")
 
 ;; Rust
-; (use-package rust-mode
-;   :ensure t
-;   :mode "\\.rs\\'")
+;; (use-package rust-mode
+;;   :ensure t
+;;   :mode "\\.rs\\'")
 
 
 ;; ==========================================

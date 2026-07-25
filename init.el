@@ -22,6 +22,7 @@
 (require 'snippet-config)
 (require 'modeline-config)
 (require 'keybindings-config)
+(require 'formatter-config)
 (require 'neoscroll)
 
 
