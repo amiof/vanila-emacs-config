@@ -63,6 +63,20 @@
   :demand t
   :config
 
+  (which-key-add-key-based-replacements
+    "SPC f" "files"
+    "SPC b" "buffer"
+    "SPC s" "search"
+    "SPC g" "git"
+    "SPC m" "bookmarks"
+    "SPC c" "code"
+    "SPC p" "popper/project"
+    "SPC o" "open"
+    "SPC h" "help"
+    "SPC w" "window"
+    "SPC q" "quit"
+    "SPC t" "terminal")
+
   (general-create-definer my-leader-def
     :states '(normal visual motion)
     :keymaps 'override
@@ -104,7 +118,13 @@
     "g f" 'my/ediff-changed-files
     "g e" 'my/ediff-with-git-rev 
     )
-
+  
+  (my-leader-def
+    "p t" 'popper-toggle
+    "p c" 'popper-cycle
+    "p k" 'popper-toggle-type
+    "p p" 'project-switch-project
+    )
 
   ;;bookmarks
   (my-leader-def
@@ -134,7 +154,9 @@
   (my-leader-def
     "o p" 'treemacs
     "o f" 'treemacs-find-file
-    "o t" 'consult-theme)
+    "o t" 'consult-theme
+    "o g" #'ghostel
+    "o G" #'my/ghostel-full-window)
 
   ;; Help
   (my-leader-def

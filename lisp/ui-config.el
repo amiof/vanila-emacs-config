@@ -1,8 +1,8 @@
 ;;; ui.el
 
-; (set-face-attribute 'default nil
-;                     :font "JetBrains Mono"
-;                     :height 120)
+;; (set-face-attribute 'default nil
+;;                     :font "JetBrains Mono"
+;;                     :height 120)
 ;; Main monospace font (used for all fixed‑width text)
 (set-face-attribute 'default nil
                     :family "JetBrains Mono"
@@ -28,76 +28,77 @@
 
 
 ;; line number
-; (global-display-line-numbers-mode 1)
+;;  (global-display-line-numbers-mode 1)
 
-(add-to-list 'default-frame-alist '(width . 130))
-(add-to-list 'default-frame-alist '(height . 40))
+;; size window in start  change that in header
+;; (add-to-list 'default-frame-alist '(width . 130))
+;; (add-to-list 'default-frame-alist '(height . 40))
 
 ;; for punch-line dependency
-; (use-package nerd-icons
-;   :ensure t)
-;
+;; (use-package nerd-icons
+;;   :ensure t)
+;;
 ;; ۲. نصب یکپارچه punch-line و وابستگی‌های داخل آن
-; (use-package punch-line
-;   :ensure (:host github :repo "konrad1977/punch-line")
-;   :after nerd-icons
-;   :init
-;   ;; فعال‌سازی مودلاین پس از اتمام لود شدن الپاکا
-;   (add-hook 'elpaca-after-init-hook #'punch-line-mode)
-;   :config
-;   ;; چون همه فایل‌ها در یک ریپازیتوری هستند، اینجا آن‌ها را به ترتیب لود می‌کنیم
-;   (require 'mode-line-hud)
-;   (require 'punch-line)
-;   ; (require 'punch-line-battery)
-;   ; (require 'punch-line-colors)
-;   ; (require 'punch-line-macro)
-;   ; (require 'punch-line-misc)
-;   ; (require 'punch-line-modal)
-;   ; (require 'punch-line-music)
-;   ; (require 'punch-line-package)
-;   ; (require 'punch-line-spinner)
-;   ; (require 'punch-line-systemmonitor)
-;   ; (require 'punch-line-term)
-;   ; (require 'punch-line-vc)
-;   ; (require 'punch-line-weather)
-;   ; (require 'punch-line-what-am-i-doing)
-;
-;   ;; اجرای توابع کمکی
-;   (add-hook 'elpaca-after-init-hook #'punch-load-tasks)
-;   (add-hook 'elpaca-after-init-hook #'punch-weather-update)
-;
-;   ;; تنظیمات شخصی شما
-;   (setq
-;    punch-line-left-separator "  "
-;    punch-line-right-separator "  "
-;    punch-line-music-info '(:service apple)
-;    punch-line-music-max-length 40))
-;
-; ;; Mode line size
-; (setq punch-line-modal-size 'medium)  ; Options: 'small, 'medium, 'large
-;
-; ;; Divider style
-; (setq punch-line-modal-divider-style 'flame)  ; Options: 'arrow, 'flame, 'ice, 'circle, 'block
-; (setq punch-line-modal-use-padding "")  ; Options: 'arrow, 'flame, 'ice, 'circle, 'block
-; (setq punch-line-left-separator "  ")
-; (setq punch-line-right-separator "  ")
-; ; Manual colors for specific sections
-; ;
-; (setq punch-line-section-backgrounds
-;       '(
-;         ; (filename . "#201010")
-;         ; (battery . "#000000")
-;         (git . "nill")
-;         ; (major-mode . "#16213e")
-;         ))
+;; (use-package punch-line
+;;   :ensure (:host github :repo "konrad1977/punch-line")
+;;   :after nerd-icons
+;;   :init
+;;   ;; فعال‌سازی مودلاین پس از اتمام لود شدن الپاکا
+;;   (add-hook 'elpaca-after-init-hook #'punch-line-mode)
+;;   :config
+;;   ;; چون همه فایل‌ها در یک ریپازیتوری هستند، اینجا آن‌ها را به ترتیب لود می‌کنیم
+;;   (require 'mode-line-hud)
+;;   (require 'punch-line)
+;;   ; (require 'punch-line-battery)
+;;   ; (require 'punch-line-colors)
+;;   ; (require 'punch-line-macro)
+;;   ; (require 'punch-line-misc)
+;;   ; (require 'punch-line-modal)
+;;   ; (require 'punch-line-music)
+;;   ; (require 'punch-line-package)
+;;   ; (require 'punch-line-spinner)
+;;   ; (require 'punch-line-systemmonitor)
+;;   ; (require 'punch-line-term)
+;;   ; (require 'punch-line-vc)
+;;   ; (require 'punch-line-weather)
+;;   ; (require 'punch-line-what-am-i-doing)
+;;
+;;   ;; اجرای توابع کمکی
+;;   (add-hook 'elpaca-after-init-hook #'punch-load-tasks)
+;;   (add-hook 'elpaca-after-init-hook #'punch-weather-update)
+;;
+;;   ;; تنظیمات شخصی شما
+;;   (setq
+;;    punch-line-left-separator "  "
+;;    punch-line-right-separator "  "
+;;    punch-line-music-info '(:service apple)
+;;    punch-line-music-max-length 40))
+;;
+;; ;; Mode line size
+;; (setq punch-line-modal-size 'medium)  ; Options: 'small, 'medium, 'large
+;;
+;; ;; Divider style
+;; (setq punch-line-modal-divider-style 'flame)  ; Options: 'arrow, 'flame, 'ice, 'circle, 'block
+;; (setq punch-line-modal-use-padding "")  ; Options: 'arrow, 'flame, 'ice, 'circle, 'block
+;; (setq punch-line-left-separator "  ")
+;; (setq punch-line-right-separator "  ")
+;; ; Manual colors for specific sections
+;; ;
+;; (setq punch-line-section-backgrounds
+;;       '(
+;;         ; (filename . "#201010")
+;;         ; (battery . "#000000")
+;;         (git . "nill")
+;;         ; (major-mode . "#16213e")
+;;         ))
 
 ;; Automatic tinting - each section gets progressively lighter
-; (setq punch-line-section-backgrounds 'auto)
-; (setq punch-line-section-background-tint-step 5)  ; 5% lighter each section
+;; (setq punch-line-section-backgrounds 'auto)
+;; (setq punch-line-section-background-tint-step 5)  ; 5% lighter each section
 
 ;; Automatic with darker progression
-; (setq punch-line-section-backgrounds 'auto)
-; (setq punch-line-section-background-tint-step -5)  ; 5% darker each section
+;; (setq punch-line-section-backgrounds 'auto)
+;; (setq punch-line-section-background-tint-step -5)  ; 5% darker each section
 
 (setq-default truncate-lines t)
 
@@ -107,83 +108,89 @@
  '(vertico-current ((t (:background "#282c34" :foreground "#51afef" :weight bold)))))
 
 (use-package solaire-mode
-             :ensure t
-             )
+  :ensure t
+  )
 (with-eval-after-load 'solaire-mode
-(require 'solaire-mode)
-(solaire-global-mode +1))
+  (require 'solaire-mode)
+  (solaire-global-mode +1))
 
 
 
-; (use-package golden-ratio
-;   :ensure t
-;   :config
-;   (golden-ratio-mode 1)
-;
-;   ;; Check if ANY ediff session is active globally
-;   (defun my/golden-ratio-inhibit-ediff ()
-;     "Disable golden-ratio if ediff is active."
-;     (bound-and-true-p ediff-this-buffer-ediff-sessions))
-;
-;   (add-to-list 'golden-ratio-inhibit-functions 'my/golden-ratio-inhibit-ediff))
+;; (use-package golden-ratio
+;;   :ensure t
+;;   :config
+;;   (golden-ratio-mode 1)
+;;
+;;   ;; Check if ANY ediff session is active globally
+;;   (defun my/golden-ratio-inhibit-ediff ()
+;;     "Disable golden-ratio if ediff is active."
+;;     (bound-and-true-p ediff-this-buffer-ediff-sessions))
+;;
+;;   (add-to-list 'golden-ratio-inhibit-functions 'my/golden-ratio-inhibit-ediff))
 
 
 
+;;;====== centaure config start
 
-(use-package centaur-tabs
-  :ensure t 
-  :demand t
-  :config
-  (centaur-tabs-mode t)
-  
-  (setq centaur-tabs-style "bar"                
-        centaur-tabs-height 32                  
-        centaur-tabs-set-bar 'left              
-        centaur-tabs-set-close-button t         
-        centaur-tabs-set-modified-marker t      
-        centaur-tabs-modified-marker "●")  
+;; (use-package centaur-tabs
+;;   :ensure t 
+;;   :demand t
+;;   :config
+;;   (centaur-tabs-mode t)
 
-  (setq centaur-tabs-set-icons t
-        centaur-tabs-icon-type 'nerd-icons)
+;;   (setq centaur-tabs-style "bar"                
+;;         centaur-tabs-height 32                  
+;;         centaur-tabs-set-bar 'left              
+;;         centaur-tabs-set-close-button t         
+;;         centaur-tabs-set-modified-marker t      
+;;         centaur-tabs-modified-marker "●")  
 
-  (centaur-tabs-headline-match))
+;;   (setq centaur-tabs-set-icons t
+;;         centaur-tabs-icon-type 'nerd-icons)
+
+;;   (centaur-tabs-headline-match))
 
 
-(with-eval-after-load 'centaur-tabs
-  ;; 1. Safely define our buffer exclusion rules
-  (defun my-centaur-tabs-hide-filter (buffer)
-    "Cleanly hide tabs in side windows, child frames, popups, and logs."
-   (let ((name (buffer-name buffer)))
-      (or
-       ;; 1. مخفی کردن در child-frameها (مثل lsp-ui-doc)
-       (when (and (fboundp 'frame-parent)
-                  (frame-parent (selected-frame)))
-         t)   ; اگر پنجرهٔ جاری child-frame باشد، تب را مخفی کن
+;; (with-eval-after-load 'centaur-tabs
+;;   ;; 1. Safely define our buffer exclusion rules
+;;   (defun my-centaur-tabs-hide-filter (buffer)
+;;     "Cleanly hide tabs in side windows, child frames, popups, and logs."
+;;    (let ((name (buffer-name buffer)))
+;;       (or
+;;        ;; 1. مخفی کردن در child-frameها (مثل lsp-ui-doc)
+;;        (when (and (fboundp 'frame-parent)
+;;                   (frame-parent (selected-frame)))
+;;          t)   ; اگر پنجرهٔ جاری child-frame باشد، تب را مخفی کن
 
-       ;; 2. مخفی کردن بر اساس نام بافر (مطمئن‌ترین روش)
-       (string-prefix-p " *lsp-ui" name)          ; بافرهای lsp-ui (شامل doc)
-       (string-prefix-p "*lsp-ui-doc" name)       ; دقیقاً نام بافر doc
-       (string-prefix-p "*lsp-log" name)          ; لاگ LSP
-       (string-prefix-p "*Messages*" name)        ; پیام‌های Emacs
-       (string-prefix-p " *lv" name)              ; بافرهای lv (برای نمایش doc)
-       (string-suffix-p "::stderr*" name)         ; خطاهای فرآیند
+;;        ;; 2. مخفی کردن بر اساس نام بافر (مطمئن‌ترین روش)
+;;        (string-prefix-p " *lsp-ui" name)          ; بافرهای lsp-ui (شامل doc)
+;;        (string-prefix-p "*lsp-ui-doc" name)       ; دقیقاً نام بافر doc
+;;        (string-prefix-p "*lsp-log" name)          ; لاگ LSP
+;;        (string-prefix-p "*Messages*" name)        ; پیام‌های Emacs
+;;        (string-prefix-p " *lv" name)              ; بافرهای lv (برای نمایش doc)
+;;        (string-suffix-p "::stderr*" name)         ; خطاهای فرآیند
 
-       ;; 3. مخفی کردن در حالت‌های خاص (ترمینال، شل، ...)
-       (with-current-buffer buffer
-         (or (derived-mode-p 'vterm-mode)
-             (derived-mode-p 'eshell-mode)
-             (derived-mode-p 'dashboard-mode)
-             (derived-mode-p 'shell-mode))))))
+;;        ;; 3. مخفی کردن در حالت‌های خاص (ترمینال، شل، ...)
+;;        (with-current-buffer buffer
+;;          (or (derived-mode-p 'vterm-mode)
+;;              (derived-mode-p 'eshell-mode)
+;;              (derived-mode-p 'dashboard-mode)
+;;              (derived-mode-p 'shell-mode))))))
 
-  ;; 2. Apply the filter function to centaur-tabs
-  (setq centaur-tabs-hide-tab-function #'my-centaur-tabs-hide-filter)
-  
-  ;; 3. Tell centaur-tabs to actively check if it's running inside a popup 
-  ;; and skip rendering if true
-  (setq centaur-tabs-show-navigation-buttons nil)
-  
-  ;; Force an update
-  (centaur-tabs-display-update))
+;;   ;; 2. Apply the filter function to centaur-tabs
+;;   (setq centaur-tabs-hide-tab-function #'my-centaur-tabs-hide-filter)
+
+;;   ;; 3. Tell centaur-tabs to actively check if it's running inside a popup 
+;;   ;; and skip rendering if true
+;;   (setq centaur-tabs-show-navigation-buttons nil)
+
+;;   ;; Force an update
+;;   (centaur-tabs-display-update))
+
+
+;;;====== centaure config end
+
+
 
 ;; pair
 (electric-pair-mode 1)
@@ -193,16 +200,18 @@
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 ;; smooth scrolling
-; (pixel-scroll-precision-mode 1)
+;; (pixel-scroll-precision-mode 1)
 
 ;; for add indent bar in codes
 (use-package indent-bars
   :ensure t
   :hook
-  ((prog-mode . indent-bars-mode)))
-
-(setq indent-bars-width-frac 0.1)
-(setq indent-bars-color '(highlight :face-bg t :blend 0.15))
-(setq indent-bars-pattern ".")
+  ((prog-mode . indent-bars-mode))
+  :custom
+  (setq
+   indent-bars-width-frac 0.1
+   indent-bars-color '(highlight :face-bg t :blend 0.15)
+   indent-bars-pattern ".")
+  (indent-bars-treesit-support t))
 
 (provide 'ui-config)

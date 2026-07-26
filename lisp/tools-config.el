@@ -88,33 +88,33 @@
   :config
   (global-display-line-numbers-mode t))
 
-;; (use-package popper
-;;   :ensure t
-;;   ;; `M-`' is already bound to `other-frame' in chadmacs-core, so popper-cycle
-;;   ;; gets `C-M-<` instead of the upstream default.
-;;   :bind (("C-`"   . popper-toggle)
-;;          ("C-M-<" . popper-cycle)
-;;          ("C-M-`" . popper-toggle-type))
-;;   :init
-;;   (setq popper-reference-buffers
-;;         '("\\*Messages\\*"
-;;           "Output\\*$"
-;;           "\\*Async Shell Command\\*"
-;;           "\\*compilation\\*"
-;;           "\\*Warnings\\*"
-;;           "\\*Backtrace\\*"
-;;           "\\*eldoc\\*"
-;;           "\\*ghostel"          ; matches *ghostel*, *ghostel-compile*, *ghostel: DIR*
-;;           "\\*ts-ls\\*"
-;;           "\\*lsp-log\\*"
-;;           help-mode
-;;           helpful-mode
-;;           compilation-mode
-;;           eshell-mode
-;;           shell-mode
-;;           ghostel-mode))
-;;   (popper-mode 1)
-;;   (popper-echo-mode 1))
+(use-package popper
+  :ensure t
+  ;; `M-`' is already bound to `other-frame' in chadmacs-core, so popper-cycle
+  ;; gets `C-M-<` instead of the upstream default.
+  :bind (("C-`"   . popper-toggle)
+         ("C-M-<" . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          "\\*compilation\\*"
+          "\\*Warnings\\*"
+          "\\*Backtrace\\*"
+          "\\*eldoc\\*"
+          "\\*ghostel"          ; matches *ghostel*, *ghostel-compile*, *ghostel: DIR*
+          "\\*ts-ls\\*"
+          "\\*lsp-log\\*"
+          help-mode
+          helpful-mode
+          compilation-mode
+          eshell-mode
+          shell-mode
+          ghostel-mode))
+  (popper-mode 1)
+  (popper-echo-mode 1))
 
 
 
@@ -191,6 +191,32 @@
   :custom
   (xref-show-xrefs-function #'consult-xref)
   (xref-show-definitions-function #'consult-xref))
+
+
+;;; Ghostel
+(use-package ghostel
+  :commands (ghostel ghostel-project)
+  :init
+  ;; Ghostel automatically downloads its native module on first run.
+  )
+
+(use-package evil-ghostel
+  :after (ghostel evil)
+  :hook (ghostel-mode . evil-ghostel-mode))
+
+(add-to-list
+ 'display-buffer-alist
+ '("^\\*ghostel.*\\*?$"
+   (display-buffer-in-side-window)
+   (side . bottom)
+   (window-height . 0.35)
+   (slot . 0)))
+
+(defun my/ghostel-full-window ()
+  "Open Ghostel in the current window."
+  (interactive)
+  (let ((display-buffer-alist nil))
+    (ghostel)))
 
 
 (provide 'tools-config)

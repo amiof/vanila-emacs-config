@@ -24,6 +24,8 @@
 (require 'keybindings-config)
 (require 'formatter-config)
 (require 'neoscroll)
+(require 'header)
+;; (require 'test)
 
 
 (add-hook 'emacs-startup-hook
