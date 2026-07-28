@@ -192,10 +192,6 @@
 
 
 
-;; pair
-(electric-pair-mode 1)
-
-
 ;;add fold mode to code 
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 
@@ -213,5 +209,32 @@
    indent-bars-color '(highlight :face-bg t :blend 0.15)
    indent-bars-pattern ".")
   (indent-bars-treesit-support t))
+
+
+(use-package rainbow-delimiters
+  :ensure t
+  :hook
+  (prog-mode . rainbow-delimiters-mode)
+  (ielm-mode . rainbow-delimiters-mode)
+  :config
+  (setq rainbow-delimiters-max-face-count 9))
+
+(use-package paren
+  :ensure nil
+  :init
+  (show-paren-mode 1)
+  :custom
+  (show-paren-delay 0)
+  (show-paren-style 'parenthesis)
+  :custom-face
+  (show-paren-match ((t (:inherit nil :weight bold :underline t))))
+  (show-paren-mismatch ((t (:foreground "white" :background "red")))))
+
+(electric-pair-mode 1)
+
+
+(use-package rainbow-mode
+  :hook (prog-mode . rainbow-mode))
+
 
 (provide 'ui-config)

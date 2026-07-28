@@ -72,6 +72,7 @@
     "SPC c" "code"
     "SPC p" "popper/project"
     "SPC o" "open"
+    "SPC r" "refactor"
     "SPC h" "help"
     "SPC w" "window"
     "SPC q" "quit"
@@ -93,8 +94,6 @@
     "f n"  'project-find-file
     "f g " 'consult-ripgrep
     "f r" 'consult-recent-file
-    "f l"  #'my/lsp-eslint-fix
-    "f b" 'lsp-biome-fix-all
     "f s" 'save-buffer)
 
 
@@ -140,10 +139,16 @@
     "c d" 'lsp-describe-thing-at-point
     "c f" 'lsp-format-buffer
     "c r" 'lsp-find-references
-    "r r" 'lsp-rename
     "c y" 'flycheck-copy-errors-as-kill
     "["   'evil-jump-backward         
     "]"   'evil-jump-forward
+    )
+
+  (my-leader-def
+    "r n" 'lsp-rename
+    "r l"  #'my/lsp-eslint-fix
+    "r b" 'lsp-biome-fix-all
+    "r f" 'apheleia-format-buffer
     )
 
   ;; (my-leader-def
