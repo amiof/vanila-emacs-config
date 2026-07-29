@@ -66,6 +66,11 @@
   (corfu-auto-delay 0.2)
   (corfu-min-width 30)
   ;; Start auto-suggesting after typing just 1 character instead of the default 3
+  (corfu-quit-at-boundary t)
+  (corfu-quit-no-match t)
+  (corfu-preview-current nil)
+  (corfu-preselect 'prompt)
+  (corfu-on-exact-match nil)
   (corfu-auto-prefix 1))
 
 

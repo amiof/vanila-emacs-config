@@ -218,5 +218,49 @@
   (let ((display-buffer-alist nil))
     (ghostel)))
 
+;; hightlight todo 
+(use-package hl-todo
+  :ensure t
+  :custom
+  (hl-todo-highlight-punctuation ":")
+  (hl-todo-keyword-faces
+   '(("TODO"  . warning)
+     ("FIXME" . error)
+     ("NOTE"  . success)
+     ("HACK"  . font-lock-warning-face)
+     ("BUG"   . error)
+     ("XXX"   . font-lock-warning-face)))
+  :config
+  (global-hl-todo-mode 1))
+
+;; for edit a name mutli select
+(use-package iedit
+  :ensure t
+  :bind (("C-;" . iedit-mode)
+         ("C-c ;" . iedit-mode)))
+
+(use-package expand-region
+  :ensure t
+  :bind
+  (("C-=" . er/expand-region)
+   ("C--" . er/contract-region)))
+
+
+;; for undo and redo windows
+(use-package winner
+  :ensure nil
+  :config
+  (winner-mode 1)
+  (setq winner-ring-size 100)
+  (setq winner-boring-buffers
+        '("*Completions*"
+          "*Help*"
+          "*Messages*"
+          "*which-key*"
+          "*Compile-Log*"
+          "*lsp-log*"
+          "*Backtrace*")))
+
+
 
 (provide 'tools-config)

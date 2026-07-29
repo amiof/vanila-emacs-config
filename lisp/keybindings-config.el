@@ -149,6 +149,7 @@
     "r l"  #'my/lsp-eslint-fix
     "r b" 'lsp-biome-fix-all
     "r f" 'apheleia-format-buffer
+    "r d" 'consult-lsp-diagnostics
     )
 
   ;; (my-leader-def
@@ -174,11 +175,13 @@
     "h c" 'helpful-command)
 
 
-  (my-leader-def
+(my-leader-def
     "w d" 'delete-window
     "w h"'evil-window-left
     "w j" 'evil-window-down
     "w k" 'evil-window-up
+    "w u" 'winner-undo 
+    "w r" 'winner-redo
     "w l" 'evil-window-right
     "w w"  (lambda () (interactive) (save-some-buffers t))
     "w c" 'save-buffer
@@ -193,9 +196,12 @@
     "q q" 'kill-emacs
     )
 
-  ;; Terminal
+;; Terminal 
   (my-leader-def
-    "t t" 'vterm))
+    "t t" 'vterm
+    "t d"  'hl-todo-occur
+    )
+  )
 
 
 ;; (with-eval-after-load 'lsp-ui
@@ -226,6 +232,8 @@
   (define-key evil-normal-state-map (kbd "m") #'next-buffer)
   (define-key evil-normal-state-map (kbd "M") #'previous-buffer)
   (define-key evil-normal-state-map (kbd "|") #'split-window-right)
+  (define-key evil-normal-state-map (kbd "]t") #'hl-todo-next)
+  (define-key evil-normal-state-map (kbd "[t") #'hl-todo-previous)
 
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)

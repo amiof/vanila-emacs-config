@@ -25,6 +25,8 @@
 (require 'formatter-config)
 (require 'neoscroll)
 (require 'header)
+(require 'compiles)
+;; (require 'compile-config)
 ;; (require 'test)
 
 

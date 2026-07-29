@@ -136,4 +136,8 @@ With prefix argument, ask for REV."
 (setq ediff-window-setup-function #'ediff-setup-windows-plain)
 (setq ediff-split-window-function #'split-window-horizontally)
 
+(use-package forge
+  :ensure t
+  :after magit)
+
 (provide 'git-tools-config)

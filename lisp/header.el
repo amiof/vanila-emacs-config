@@ -94,9 +94,9 @@
   (setq-local header-line-format (default-value 'header-line-format)))
 
 (with-eval-after-load 'lsp-mode
-  (add-hook 'lsp-after-open-hook        #'my/restore-my-header-line t)
-  (add-hook 'lsp-after-initialize-hook  #'my/restore-my-header-line t)
-  (add-hook 'lsp-managed-mode-hook      #'my/restore-my-header-line t)
+  ;; (add-hook 'lsp-after-open-hook        #'my/restore-my-header-line t)
+  ;; (add-hook 'lsp-after-initialize-hook  #'my/restore-my-header-line t)
+  ;; (add-hook 'lsp-managed-mode-hook      #'my/restore-my-header-line t)
   (add-hook 'lsp-configure-hook         #'my/restore-my-header-line t))
 
 ;; --- Header content ---------------------------------------------------------

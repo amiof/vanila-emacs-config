@@ -1,6 +1,16 @@
 ;;; lsp-config.el
 ;;;
 
+(use-package gcmh
+  :ensure t
+  :custom
+  (gcmh-idle-delay 5)
+  (gcmh-high-cons-threshold (* 128 1024 1024))
+  :config
+  (gcmh-mode 1))
+
+(setq read-process-output-max (* 4 1024 1024)) ; 4 MB
+
 ;; ==========================================
 ;; 1. TREE-SITTER SETUP
 ;; ==========================================
@@ -83,12 +93,26 @@
    lsp-diagnostics-provider :flycheck
 
    ;; UI
-   lsp-headerline-breadcrumb-enable t
+   lsp-headerline-breadcrumb-enable nil
 
    ;; performance
    lsp-idle-delay 0.3
    lsp-log-io nil
-   lsp-enable-file-watchers nil
+   lsp-enable-file-watchers t
+   lsp-file-watchers-ignored
+      '("^\\.git$"
+        "^\\.hg$"
+        "^\\.svn$"
+        "^node_modules$"
+        "^__pycache__$"
+        "^\\.cache$"
+        "^\\.venv$"
+        "^venv$"
+        "^dist$"
+        "^build$"
+        "^target$"
+        "^\\.next$"
+        "^coverage$")
 
    ;; features
    lsp-enable-symbol-highlighting t
@@ -181,6 +205,14 @@
   :commands dape
   :config
   (setq dape-buffer-window-arrangement 'right))
+
+;; for show diagnostics errors 
+(use-package consult-lsp
+  :ensure t
+  :after lsp-mode
+  :bind
+  (:map lsp-mode-map
+        ("C-c l d" . consult-lsp-diagnostics)))
 
 (provide 'lsp-config)
 ;;; lsp-config.el ends here
