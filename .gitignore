@@ -12,6 +12,8 @@ projectile-frecency.eld
 projects 
 recentf
 bookmarks
+*.sqlite
+*.eld
 *~
 \#*\#
 .\#*
