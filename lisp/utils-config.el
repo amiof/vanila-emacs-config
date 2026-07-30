@@ -36,7 +36,11 @@
       (select-window (get-mru-window nil nil t))
     (treemacs-select-window)))
 
-
+(defun my/projectile-switch-project-and-treemacs ()
+  (interactive)
+  (projectile-switch-project)
+  (when (treemacs-current-visibility)
+    (treemacs-display-current-project-exclusively)))
 
 
 (provide 'utils-config)

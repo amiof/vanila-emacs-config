@@ -67,6 +67,7 @@
     "SPC f" "files"
     "SPC b" "buffer"
     "SPC s" "search"
+    "SPC k" "popper"
     "SPC g" "git"
     "SPC m" "bookmarks"
     "SPC c" "code"
@@ -118,12 +119,27 @@
     "g e" 'my/ediff-with-git-rev 
     )
   
+  ;;popper
   (my-leader-def
-    "p t" 'popper-toggle
-    "p c" 'popper-cycle
-    "p k" 'popper-toggle-type
-    "p p" 'project-switch-project
+    "k t" 'popper-toggle
+    "k c" 'popper-cycle
+    "k k" 'popper-toggle-type
+    ;; "p p" 'project-switch-project
     )
+
+ (my-leader-def
+  "p p" #'my/projectile-switch-project-and-treemacs
+  "p f" #'projectile-find-file
+  "p d" #'projectile-find-dir
+  "p r" #'projectile-recentf
+  "p s" #'projectile-ripgrep
+  "p k" #'projectile-kill-buffers
+  "p c" #'projectile-compile-project
+  "p t" #'projectile-test-project
+  "p R" #'projectile-replace
+  "p i" #'projectile-invalidate-cache
+  "p a" #'projectile-add-known-project
+  "p x" #'projectile-remove-known-project)
 
   ;;bookmarks
   (my-leader-def
@@ -195,6 +211,7 @@
   (my-leader-def
     "q q" 'kill-emacs
     )
+
 
 ;; Terminal 
   (my-leader-def
