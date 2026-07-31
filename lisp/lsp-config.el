@@ -197,14 +197,14 @@
 ;;   :mode "\\.rs\\'")
 
 
-;; ==========================================
-;; 5. DEBUGGER
-;; ==========================================
-(use-package dape
-  :ensure t
-  :commands dape
-  :config
-  (setq dape-buffer-window-arrangement 'right))
+;; ;; ==========================================
+;; ;; 5. DEBUGGER
+;; ;; ==========================================
+;; (use-package dape
+;;   :ensure t
+;;   :commands dape
+;;   :config
+;;   (setq dape-buffer-window-arrangement 'right))
 
 ;; for show diagnostics errors 
 (use-package consult-lsp

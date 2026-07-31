@@ -262,5 +262,14 @@
           "*Backtrace*")))
 
 
+;; for change auto cloes tag name when change first tag name
+(use-package auto-rename-tag
+  :ensure t
+  :hook (prog-mode . auto-rename-tag-mode))
+
+;; for move text with M-j and M-K
+(use-package move-text
+  :ensure t )
+
 
 (provide 'tools-config)

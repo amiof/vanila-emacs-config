@@ -6,6 +6,7 @@
 
 ;; Use expand-file-name to guarantee Emacs resolves the '~' properly
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp/dap" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lang" user-emacs-directory))
 
 
@@ -27,6 +28,7 @@
 (require 'neoscroll)
 (require 'header)
 (require 'compiles)
+;; (require 'dap-config)
 ;; (require 'compile-config)
 ;; (require 'test)
 

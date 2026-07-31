@@ -251,6 +251,8 @@
   (define-key evil-normal-state-map (kbd "|") #'split-window-right)
   (define-key evil-normal-state-map (kbd "]t") #'hl-todo-next)
   (define-key evil-normal-state-map (kbd "[t") #'hl-todo-previous)
+  (define-key evil-normal-state-map (kbd "M-j") #'move-text-down)
+  (define-key evil-normal-state-map (kbd "M-k") #'move-text-up)
 
   (define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
   (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)

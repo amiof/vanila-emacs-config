@@ -14,6 +14,9 @@
         '((rust-mode . rustfmt)
           (go-mode . goimports)
 
+          ;; Emacs Lisp
+          (emacs-lisp-mode . lisp-indent)
+
           ;; Tree-sitter JS/TS
           (js-ts-mode . my/biome)
           (typescript-ts-mode . my/biome)
