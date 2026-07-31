@@ -113,8 +113,10 @@
                                       " mode)"))
                         (coords (format-mode-line "%c:%l "))
                         (breadcrumb
-                         (when (bound-and-true-p lsp-mode)
-                           (lsp-headerline--build-string))))
+			 (when (and (bound-and-true-p lsp-mode)
+				    (fboundp 'lsp-headerline--build-string))
+			   (lsp-headerline--build-string))
+			 ))
                     (list
                      (propertize " " 'face (cdr prefix)  'display '(raise -0.25))
                      (propertize (car prefix) 'face (cdr prefix))

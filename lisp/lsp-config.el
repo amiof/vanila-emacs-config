@@ -86,13 +86,17 @@
   (setq
    lsp-auto-guess-root t
 
+   ;; completion
+   lsp-completion-provider :none
+   lsp-completion-enable t
+   lsp-enable-snippet t
    ;; hints
    lsp-inlay-hint-enable t
 
    ;; diagnostics
    lsp-diagnostics-provider :flycheck
 
-   ;; UI
+   ;; UI  disable for header can show breadcrumb
    lsp-headerline-breadcrumb-enable nil
 
    ;; performance
@@ -100,19 +104,19 @@
    lsp-log-io nil
    lsp-enable-file-watchers t
    lsp-file-watchers-ignored
-      '("^\\.git$"
-        "^\\.hg$"
-        "^\\.svn$"
-        "^node_modules$"
-        "^__pycache__$"
-        "^\\.cache$"
-        "^\\.venv$"
-        "^venv$"
-        "^dist$"
-        "^build$"
-        "^target$"
-        "^\\.next$"
-        "^coverage$")
+   '("^\\.git$"
+     "^\\.hg$"
+     "^\\.svn$"
+     "^node_modules$"
+     "^__pycache__$"
+     "^\\.cache$"
+     "^\\.venv$"
+     "^venv$"
+     "^dist$"
+     "^build$"
+     "^target$"
+     "^\\.next$"
+     "^coverage$")
 
    ;; features
    lsp-enable-symbol-highlighting t

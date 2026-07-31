@@ -24,7 +24,7 @@
 (use-package tokyo-night)
 (use-package doom-themes
   :config
-  (load-theme 'tokyo-night-moon t))
+  (load-theme 'doom-gruvbox t))
 
 
 ;; line number
