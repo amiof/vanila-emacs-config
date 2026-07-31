@@ -123,6 +123,7 @@ With prefix argument, ask for REV."
                                  :prompt prompt
                                  :require-match t
                                  :sort t
+				 :category 'file
                                  :history 'my-ediff-changed-files-history)
                 (completing-read prompt
                                  files
