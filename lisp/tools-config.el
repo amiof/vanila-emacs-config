@@ -272,4 +272,58 @@
   :ensure t )
 
 
+(use-package embark
+  :bind
+  (("C-." . embark-act)
+   ("C-;" . embark-dwim)
+   ("C-h B" . embark-bindings))
+  :init
+  ;; نمایش بهتر راهنمای کلیدها
+  (setq prefix-help-command #'embark-prefix-help-command)
+
+  :config
+  ;; مخفی کردن mode-line در پنجره‌های Embark Collect
+  (add-to-list
+   'display-buffer-alist
+   '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+     nil
+     (window-parameters (mode-line-format . none)))))
+
+
+(use-package embark-consult
+  :after (embark consult)
+  :config
+  (add-hook 'embark-collect-mode-hook
+            #'consult--default-completion-list-preview-setup))
+
+
+
+
+(use-package crux
+  :bind
+  (;; file
+   ("C-a"     . crux-move-beginning-of-line)
+   ("C-k"     . crux-smart-kill-line)
+   ("C-c D"   . crux-delete-file-and-buffer)
+   ("C-c R"   . crux-rename-file-and-buffer)
+   ("C-c C-k" . crux-kill-other-buffers)
+
+   ;; edit
+   ("C-c d"   . crux-duplicate-current-line-or-region)
+   ("C-c M-d" . crux-duplicate-and-comment-current-line-or-region)
+   ("C-c o"   . crux-open-with)
+
+   ;;buffer
+   ("C-x 4 t" . crux-transpose-windows)
+   ("C-c s"   . crux-swap-windows)
+
+   ;; command
+   ("C-c u"   . crux-view-url)
+   ("C-c e"   . crux-eval-and-replace)))
+
+(use-package wgrep
+  :defer t
+  :config
+  (setq wgrep-auto-save-buffer t))
+
 (provide 'tools-config)

@@ -41,20 +41,23 @@
 (global-set-key (kbd "C-c k") #'my/smart-close)
 
 
-;; next/previous buffer فقط فایل‌های واقعی
-(defun my/real-buffer-p (buf)
-  (and (buffer-file-name buf)
-       (not (string-prefix-p "*" (buffer-name buf)))))
-
-(set-frame-parameter nil 'buffer-predicate #'my/real-buffer-p)
-
-(setq read-buffer-completion-ignore-case t)
+(with-eval-after-load 'consult
+  (defvar my/consult--source-real-buffer
+    `(:name "Real Buffers"
+	    :narrow ?b
+	    :category buffer
+	    :state ,#'consult--buffer-state
+	    :items
+	    ,(lambda ()
+               (mapcar #'buffer-name
+                       (cl-remove-if-not #'my/real-buffer-p (buffer-list)))))))
 
 (defun my/switch-to-real-buffer ()
+  "Consult buffer switcher limited to `my/real-buffer-p` buffers."
   (interactive)
-  (let ((buffers (cl-remove-if-not #'my/real-buffer-p (buffer-list))))
-    (switch-to-buffer (completing-read "Buffer: "
-                                       (mapcar #'buffer-name buffers)))))
+  (require 'consult)
+  (let ((consult-buffer-sources (list my/consult--source-real-buffer)))
+    (consult-buffer)))
 
 ;; (global-set-key (kbd "C-x b") #'my/switch-to-real-buffer)
 
@@ -77,6 +80,7 @@
     "SPC h" "help"
     "SPC w" "window"
     "SPC q" "quit"
+    "SPC x" "crux"
     "SPC t" "terminal")
 
   (general-create-definer my-leader-def
@@ -114,12 +118,13 @@
   (my-leader-def
     "g g" 'magit-status
     "g s" 'diff-hl-show-hunk
-    "g r" 'diff-hl-revert-hunk
+    "g h" 'diff-hl-revert-hunk
+    "g r" 'vc-revert
     "g f" 'my/ediff-changed-files
-    "g e" 'my/ediff-with-git-rev 
-    )
-  
+    "g e" 'my/ediff-with-git-rev
+    ) 
   ;;popper
+
   (my-leader-def
     "k t" 'popper-toggle
     "k c" 'popper-cycle
@@ -127,19 +132,19 @@
     ;; "p p" 'project-switch-project
     )
 
- (my-leader-def
-  "p p" #'my/projectile-switch-project-and-treemacs
-  "p f" #'projectile-find-file
-  "p d" #'projectile-find-dir
-  "p r" #'projectile-recentf
-  "p s" #'projectile-ripgrep
-  "p k" #'projectile-kill-buffers
-  "p c" #'projectile-compile-project
-  "p t" #'projectile-test-project
-  "p R" #'projectile-replace
-  "p i" #'projectile-invalidate-cache
-  "p a" #'projectile-add-known-project
-  "p x" #'projectile-remove-known-project)
+  (my-leader-def
+    "p p" #'my/projectile-switch-project-and-treemacs
+    "p f" #'projectile-find-file
+    "p d" #'projectile-find-dir
+    "p r" #'projectile-recentf
+    "p s" #'projectile-ripgrep
+    "p k" #'projectile-kill-buffers
+    "p c" #'projectile-compile-project
+    "p t" #'projectile-test-project
+    "p R" #'projectile-replace
+    "p i" #'projectile-invalidate-cache
+    "p a" #'projectile-add-known-project
+    "p x" #'projectile-remove-known-project)
 
   ;;bookmarks
   (my-leader-def
@@ -166,6 +171,7 @@
     "r b" 'lsp-biome-fix-all
     "r f" 'apheleia-format-buffer
     "r d" 'consult-lsp-diagnostics
+    "r e" 'flycheck-list-errors
     )
 
   ;; (my-leader-def
@@ -191,7 +197,7 @@
     "h c" 'helpful-command)
 
 
-(my-leader-def
+  (my-leader-def
     "w d" 'delete-window
     "w h"'evil-window-left
     "w j" 'evil-window-down
@@ -212,8 +218,19 @@
     "q q" 'kill-emacs
     )
 
+  (my-leader-def
+    "x x" 'crux-transpose-windows
+    "x w" 'crux-swap-windows 
+    "x r" 'crux-rename-file-and-buffer 
+    "x d" 'crux-delete-file-and-buffer
+    "x b" 'crux-kill-other-buffers
+    "x o" 'crux-open-with
+    "x s" 'crux-sudo-edit
+    "x c" 'crux-duplicate-and-comment-current-line-or-region
+    )
 
-;; Terminal 
+
+  ;; Terminal 
   (my-leader-def
     "t t" 'vterm
     "t d"  'hl-todo-occur

@@ -9,7 +9,8 @@
         ("TAB" . vertico-next)
         ("<tab>" . vertico-next)
         ("S-TAB" . vertico-previous)
-	("<backtab>" . vertico-previous)))
+	("<backtab>" . vertico-previous)
+	("C-i"   . vertico-insert)))
 
 
 ;; Better matching
