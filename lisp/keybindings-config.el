@@ -41,6 +41,15 @@
 (global-set-key (kbd "C-c k") #'my/smart-close)
 
 
+(require 'cl-lib) ; needed for cl-remove-if-not
+
+(defun my/real-buffer-p (buffer)
+  "Return non-nil if BUFFER is a 'real' user buffer."
+  (let ((name (buffer-name buffer)))
+    (and (not (string-prefix-p " " name))      ; hidden buffers start with space
+         (not (string-prefix-p "*" name))      ; exclude *scratch*, *Messages*, etc.
+         (not (minibufferp buffer)))))
+
 (with-eval-after-load 'consult
   (defvar my/consult--source-real-buffer
     `(:name "Real Buffers"
@@ -58,6 +67,36 @@
   (require 'consult)
   (let ((consult-buffer-sources (list my/consult--source-real-buffer)))
     (consult-buffer)))
+
+
+;; for switch between buffer with M and m
+(defun my/real-buffer-list ()
+  "Get sorted list of real buffers."
+  (sort (cl-remove-if-not #'my/real-buffer-p (buffer-list))
+        (lambda (a b) (string< (buffer-name a) (buffer-name b)))))
+
+(defun my/next-real-buffer ()
+  "Switch to next real buffer."
+  (interactive)
+  (let* ((buffers (my/real-buffer-list))
+         (current (current-buffer))
+         (pos (cl-position current buffers)))
+    (if (and pos buffers)
+        (switch-to-buffer
+         (nth (mod (1+ pos) (length buffers)) buffers))
+      (when buffers (switch-to-buffer (car buffers))))))
+
+(defun my/previous-real-buffer ()
+  "Switch to previous real buffer."
+  (interactive)
+  (let* ((buffers (my/real-buffer-list))
+         (current (current-buffer))
+         (pos (cl-position current buffers)))
+    (if (and pos buffers)
+        (switch-to-buffer
+         (nth (mod (1- pos) (length buffers)) buffers))
+      (when buffers (switch-to-buffer (car buffers))))))
+
 
 ;; (global-set-key (kbd "C-x b") #'my/switch-to-real-buffer)
 
@@ -263,8 +302,10 @@
   (define-key evil-normal-state-map (kbd "g D") #'lsp-find-references)
   (define-key evil-normal-state-map (kbd "g c c") #'comment-line)
 
-  (define-key evil-normal-state-map (kbd "m") #'next-buffer)
-  (define-key evil-normal-state-map (kbd "M") #'previous-buffer)
+  ;; (define-key evil-normal-state-map (kbd "m") #'next-buffer)
+  ;; (define-key evil-normal-state-map (kbd "M") #'previous-buffer)
+  (define-key evil-normal-state-map (kbd "m") #'my/next-real-buffer)
+  (define-key evil-normal-state-map (kbd "M") #'my/previous-real-buffer)
   (define-key evil-normal-state-map (kbd "|") #'split-window-right)
   (define-key evil-normal-state-map (kbd "]t") #'hl-todo-next)
   (define-key evil-normal-state-map (kbd "[t") #'hl-todo-previous)
