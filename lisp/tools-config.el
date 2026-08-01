@@ -326,4 +326,10 @@
   :config
   (setq wgrep-auto-save-buffer t))
 
+;; colorize dired 
+(use-package diredfl
+  :ensure t
+  :config
+  (diredfl-global-mode 1))
+
 (provide 'tools-config)
