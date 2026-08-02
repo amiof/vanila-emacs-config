@@ -44,11 +44,16 @@
 (require 'cl-lib) ; needed for cl-remove-if-not
 
 (defun my/real-buffer-p (buffer)
-  "Return non-nil if BUFFER is a 'real' user buffer."
+  "Return non-nil if BUFFER is a 'real' user file buffer."
   (let ((name (buffer-name buffer)))
-    (and (not (string-prefix-p " " name))      ; hidden buffers start with space
-         (not (string-prefix-p "*" name))      ; exclude *scratch*, *Messages*, etc.
-         (not (minibufferp buffer)))))
+    (and (not (string-prefix-p " " name))
+         (not (string-prefix-p "*" name))
+         (not (minibufferp buffer))
+         (buffer-file-name buffer)
+         (with-current-buffer buffer
+           (not (memq major-mode '(dired-mode
+                                   magit-status-mode
+                                   vterm-mode)))))))
 
 (with-eval-after-load 'consult
   (defvar my/consult--source-real-buffer
@@ -157,11 +162,12 @@
   (my-leader-def
     "g g" 'magit-status
     "g s" 'diff-hl-show-hunk
-    "g h" 'diff-hl-revert-hunk
+    "g l" 'diff-hl-revert-hunk
     "g r" 'vc-revert
     "g f" 'my/ediff-changed-files
     "g e" 'my/ediff-with-git-rev
-    ) 
+    "g h" 'magit-log-buffer-file 
+    )
   ;;popper
 
   (my-leader-def
