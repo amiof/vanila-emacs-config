@@ -26,6 +26,8 @@
   :config
   (load-theme 'doom-gruvbox t))
 
+;; (load-theme 'amir-dev t)
+
 
 ;; line number
 ;;  (global-display-line-numbers-mode 1)

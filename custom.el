@@ -27,13 +27,13 @@
 
 ;; --- Backend / scripting ---
 ;; (require 'python-lang)         ;; Python (+ optional pyvenv)
- (require 'go-lang)             ;; Go (+ go.mod)
+(require 'go-lang)                ;; Go (+ go.mod)
 ;; (require 'ruby-lang)           ;; Ruby / Rails / Gemfile / Rakefile
 ;; (require 'elixir-lang)         ;; Elixir + HEEx (Phoenix templates)
- (require 'lua-lang)            ;; Lua
+(require 'lua-lang)               ;; Lua
 
 ;; --- Systems / native ---
- (require 'rust-lang)           ;; Rust + rustic + cargo
+(require 'rust-lang)              ;; Rust + rustic + cargo
 ;; (require 'c-cpp-lang)          ;; C / C++ + meson + cmake
 ;; (require 'csharp-lang)         ;; C# / .NET
 ;; (require 'zig-lang)            ;; Zig
@@ -52,12 +52,12 @@
 ;; (require 'julia-lang)          ;; Julia + LanguageServer.jl
 
 ;; --- DevOps / infra ---
- (require 'docker-lang)         ;; Dockerfile (compose via yaml)
+(require 'docker-lang)            ;; Dockerfile (compose via yaml)
 ;; (require 'terraform-lang)      ;; Terraform / HCL
 ;; (require 'nix-lang)            ;; Nix
 
 ;; --- Docs / writing ---
- (require 'markdown-lang)       ;; Markdown / GFM (+ marksman)
+(require 'markdown-lang)          ;; Markdown / GFM (+ marksman)
 
 ;; --- Niche ---
 ;; (require 'gerbil-lang)         ;; Gerbil Scheme

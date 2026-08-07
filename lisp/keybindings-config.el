@@ -229,6 +229,7 @@
     "o f" 'treemacs-find-file
     "o t" 'consult-theme
     "o g" #'ghostel
+    "o i" 'imenu-list-smart-toggle
     "o G" #'my/ghostel-full-window)
 
   ;; Help

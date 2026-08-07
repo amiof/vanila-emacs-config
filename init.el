@@ -10,6 +10,11 @@
 (add-to-list 'load-path (expand-file-name "lang" user-emacs-directory))
 
 
+;; for read my theme 
+;; (add-to-list 'load-path (expand-file-name "theme" user-emacs-directory))
+;; (add-to-list 'custom-theme-load-path (expand-file-name "theme" user-emacs-directory))
+
+
 (require 'bootstrap-config)
 (require 'core-config)
 (create-or-load-custom-file)
@@ -30,7 +35,6 @@
 (require 'compiles)
 ;; (require 'dap-config)
 ;; (require 'compile-config)
-;; (require 'test)
 
 
 (add-hook 'emacs-startup-hook

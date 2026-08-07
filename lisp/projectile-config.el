@@ -3,10 +3,49 @@
   :demand t
   :init
   (projectile-mode 1)
+  (setq projectile-enable-caching t
+        projectile-indexing-method 'hybrid
+
+        projectile-globally-ignored-directories
+        '(".git"
+          "node_modules"
+          "dist"
+          "build"
+          "out"
+          "coverage"
+          ".cache"
+          ".next"
+          ".nuxt"
+          "__pycache__"
+          ".venv"
+          "venv"
+          "env"
+          "target"
+          "vendor"
+          "bower_components"
+          ".gradle"
+          ".idea")
+
+        projectile-globally-ignored-files
+        '("*.min.js"
+          "*.js.map"
+          "*.map"
+          "*.log"
+          "*.lock"
+          "*.sqlite"
+          "*.db"
+          "*.zip"
+          "*.tar.gz"
+          "*.png"
+          "*.jpg"
+          "*.jpeg"
+          "*.gif"
+          "*.webp"
+          "*.pdf"))
 
   :custom
   (projectile-completion-system 'default)
-  (projectile-enable-caching t)
+  ;; (projectile-enable-caching t)
   (projectile-indexing-method 'alien)
   (projectile-sort-order 'recently-active)
   (projectile-project-search-path
@@ -15,14 +54,6 @@
      "~/.config/"))
 
   :config
-  (setq projectile-globally-ignored-directories
-        '(".git"
-          "node_modules"
-          ".next"
-          "dist"
-          "build"
-          "target"))
-
   (setq projectile-switch-project-action
         #'projectile-dired))
 

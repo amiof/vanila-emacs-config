@@ -25,7 +25,10 @@
 ;; Extra information in minibuffer
 (use-package marginalia
   :init
-  (marginalia-mode))
+  (marginalia-mode)
+  :config
+  (setq marginalia-align-offset 20)
+  )
 
 
 ;; Search and navigation commands

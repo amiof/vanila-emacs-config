@@ -332,4 +332,8 @@
   :config
   (diredfl-global-mode 1))
 
+(use-package imenu-list
+  :bind
+  ("C-c s" . imenu-list-smart-toggle))
+
 (provide 'tools-config)
