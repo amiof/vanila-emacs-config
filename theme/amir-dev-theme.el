@@ -217,10 +217,38 @@
 
 (custom-theme-set-faces
  'amir-dev
- `(dired-directory ((t (:foreground ,(amir-dev-color 'blue) :weight bold))))
- `(dired-symlink ((t (:foreground ,(amir-dev-color 'aqua)))))
- `(dired-flagged ((t (:foreground ,(amir-dev-color 'red)))))
- `(dired-mark ((t (:foreground ,(amir-dev-color 'yellow) :weight bold)))))
+
+ ;; Dired permissions
+ `(diredfl-read-priv
+   ((t (:foreground ,(amir-dev-color 'fg-dim)))))
+
+ `(diredfl-write-priv
+   ((t (:foreground ,(amir-dev-color 'yellow)))))
+
+ `(diredfl-exec-priv
+   ((t (:foreground ,(amir-dev-color 'green)))))
+
+ `(diredfl-no-priv
+   ((t (:foreground ,(amir-dev-color 'fg-dim)))))
+
+ ;; Dired directories
+ `(diredfl-dir-priv
+   ((t (:foreground ,(amir-dev-color 'blue)))))
+
+ `(diredfl-dir-name
+   ((t (:foreground ,(amir-dev-color 'blue)
+                    :weight bold))))
+
+ `(diredfl-dir-heading
+   ((t (:foreground ,(amir-dev-color 'yellow)
+                    :weight bold))))
+
+ ;; Dired files
+ `(diredfl-file-name
+   ((t (:foreground ,(amir-dev-color 'fg))))))
+
+
+
 
 ;; ============================================================
 ;; Diff
@@ -232,6 +260,32 @@
  `(diff-removed ((t (:foreground ,(amir-dev-color 'red)))))
  `(diff-changed ((t (:foreground ,(amir-dev-color 'blue))))))
 
+
+;; ============================================================
+;; Diff-hl
+;; ============================================================
+(custom-theme-set-faces
+ 'amir-dev
+
+ `(diff-hl-insert
+   ((t (:foreground ,(amir-dev-color 'green)
+                    :background ,(amir-dev-color 'green)))))
+
+ `(diff-hl-delete
+   ((t (:foreground ,(amir-dev-color 'red)
+                    :background ,(amir-dev-color 'red)))))
+
+ `(diff-hl-change
+   ((t (:foreground ,(amir-dev-color 'blue)
+                    :background ,(amir-dev-color 'blue)))))
+
+ `(diff-hl-unknown
+   ((t (:foreground ,(amir-dev-color 'yellow)
+                    :background ,(amir-dev-color 'yellow)))))
+
+ `(diff-hl-reverted
+   ((t (:foreground ,(amir-dev-color 'fg-dim)
+                    :background ,(amir-dev-color 'fg-dim))))))
 ;; ============================================================
 ;; Compilation
 ;; ============================================================
@@ -290,24 +344,148 @@
 ;; LSP highlight (symbol read/write on cursor, NOT semantic tokens)
 ;; ============================================================
 
+;; (custom-theme-set-faces
+;;  'amir-dev
+;;  `(lsp-face-highlight-textual
+;;    ((t (:background ,(amir-dev-color 'read-symbol) :foreground ,(amir-dev-color 'fg-bright)))))
+;;  `(lsp-face-highlight-read
+;;    ((t (:background ,(amir-dev-color 'read-symbol) :foreground ,(amir-dev-color 'fg-bright)))))
+;;  `(lsp-face-highlight-write
+;;    ((t (:background ,(amir-dev-color 'write-symbol) :foreground ,(amir-dev-color 'fg-bright)))))
+;;  `(lsp-headerline-breadcrumb-path-face ((t (:foreground ,(amir-dev-color 'fg-dim)))))
+;;  `(lsp-headerline-breadcrumb-path-error-face ((t (:foreground ,(amir-dev-color 'red)))))
+;;  `(lsp-headerline-breadcrumb-path-info-face ((t (:foreground ,(amir-dev-color 'blue)))))
+;;  `(lsp-headerline-breadcrumb-symbols-face ((t (:foreground ,(amir-dev-color 'fg))))))
+
+;; ;; ============================================================
+;; Header line + LSP breadcrumb
+;; ============================================================
+
 (custom-theme-set-faces
  'amir-dev
- `(lsp-face-highlight-textual
-   ((t (:background ,(amir-dev-color 'read-symbol) :foreground ,(amir-dev-color 'fg-bright)))))
- `(lsp-face-highlight-read
-   ((t (:background ,(amir-dev-color 'read-symbol) :foreground ,(amir-dev-color 'fg-bright)))))
- `(lsp-face-highlight-write
-   ((t (:background ,(amir-dev-color 'write-symbol) :foreground ,(amir-dev-color 'fg-bright)))))
- `(lsp-headerline-breadcrumb-path-face ((t (:foreground ,(amir-dev-color 'fg-dim)))))
- `(lsp-headerline-breadcrumb-path-error-face ((t (:foreground ,(amir-dev-color 'red)))))
- `(lsp-headerline-breadcrumb-path-info-face ((t (:foreground ,(amir-dev-color 'blue)))))
- `(lsp-headerline-breadcrumb-symbols-face ((t (:foreground ,(amir-dev-color 'fg))))))
+
+ ;; Top header line background
+ `(header-line
+   ((t
+     (:background "#32302f"
+                  :foreground "#ebdbb2"
+                  :box nil
+                  :inherit unspecified))))
+
+ `(header-line-highlight
+   ((t
+     (:background "#504945"
+                  :foreground "#fbf1c7"
+                  :inherit unspecified))))
+
+ ;; If you use the standalone `breadcrumb` package
+ `(breadcrumb-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#ebdbb2"))))
+
+ ;; LSP breadcrumb faces
+ `(lsp-headerline-breadcrumb-path-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#d5c4a1"))))
+
+ `(lsp-headerline-breadcrumb-path-error-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#fb4934"
+                  :weight bold))))
+
+ `(lsp-headerline-breadcrumb-path-info-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#83a598"))))
+
+ `(lsp-headerline-breadcrumb-symbols-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#ebdbb2"))))
+
+ `(lsp-headerline-breadcrumb-project-prefix-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#fabd2f"))))
+
+ `(lsp-headerline-breadcrumb-separator-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#928374"))))
+
+ `(lsp-headerline-breadcrumb-unknown-file-name-face
+   ((t
+     (:background "#32302f"
+                  :foreground "#d5c4a1")))))
+
+
 
 ;; NOTE: We intentionally do NOT define lsp-face-semhl-* faces here.
 ;; lsp-mode already defines them to :inherit the matching font-lock-*
 ;; faces above (e.g. lsp-face-semhl-method inherits font-lock-function-name-face,
 ;; lsp-face-semhl-default-library inherits font-lock-builtin-face).
 ;; Defining them again here would only risk breaking that correct default.
+
+;; ============================================================
+;; LSP semhl 
+;; ============================================================
+(custom-theme-set-faces
+ 'amir-dev
+
+ `(lsp-face-semhl-variable
+   ((t (:foreground ,(amir-dev-color 'variable)))))
+
+ `(lsp-face-semhl-parameter
+   ((t (:foreground ,(amir-dev-color 'parameter)))))
+
+ `(lsp-face-semhl-property
+   ((t (:foreground ,(amir-dev-color 'property)))))
+
+ `(lsp-face-semhl-function
+   ((t (:foreground ,(amir-dev-color 'function)))))
+
+ `(lsp-face-semhl-method
+   ((t (:foreground ,(amir-dev-color 'method)))))
+
+ `(lsp-face-semhl-type
+   ((t (:foreground ,(amir-dev-color 'type) :weight bold))))
+
+ `(lsp-face-semhl-class
+   ((t (:foreground ,(amir-dev-color 'class) :weight bold))))
+
+ `(lsp-face-semhl-interface
+   ((t (:foreground ,(amir-dev-color 'interface) :weight bold))))
+
+ `(lsp-face-semhl-enum
+   ((t (:foreground ,(amir-dev-color 'type) :weight bold))))
+
+ `(lsp-face-semhl-constant
+   ((t (:foreground ,(amir-dev-color 'constant)))))
+
+ `(lsp-face-semhl-enum-member
+   ((t (:foreground ,(amir-dev-color 'constant)))))
+
+ `(lsp-face-semhl-keyword
+   ((t (:foreground ,(amir-dev-color 'keyword)))))
+
+ `(lsp-face-semhl-string
+   ((t (:foreground ,(amir-dev-color 'string)))))
+
+ `(lsp-face-semhl-number
+   ((t (:foreground ,(amir-dev-color 'number)))))
+
+ `(lsp-face-semhl-operator
+   ((t (:foreground ,(amir-dev-color 'operator)))))
+
+ `(lsp-face-semhl-comment
+   ((t (:foreground ,(amir-dev-color 'comment) :slant italic))))
+
+ `(lsp-face-semhl-default-library
+   ((t (:foreground ,(amir-dev-color 'type)))))
+ )
 
 ;; ============================================================
 ;; Company / Corfu
@@ -463,6 +641,42 @@
  `(term-color-magenta ((t (:foreground "#d3869b" :background "#d3869b"))))
  `(term-color-cyan ((t (:foreground "#8ec07c" :background "#8ec07c"))))
  `(term-color-white ((t (:foreground "#ebdbb2" :background "#ebdbb2")))))
+;; ============================================================
+;; lsp-ui-doc / documentation popup
+;; ============================================================
+
+(custom-theme-set-faces
+ 'amir-dev
+
+ `(lsp-ui-doc-background
+   ((t
+     (:background ,(amir-dev-color 'bg-soft)
+                  :foreground ,(amir-dev-color 'fg)))))
+
+ `(lsp-ui-doc-header
+   ((t
+     (:background ,(amir-dev-color 'bg-highlight)
+                  :foreground ,(amir-dev-color 'fg-soft)
+                  :weight bold))))
+
+ `(lsp-ui-doc-highlight-hover
+   ((t
+     (:background ,(amir-dev-color 'bg-current-line)
+                  :foreground ,(amir-dev-color 'fg-bright)))))
+
+ `(lsp-ui-doc-url
+   ((t
+     (:foreground ,(amir-dev-color 'blue)
+                  :underline t))))
+
+ `(lsp-ui-doc-symbol
+   ((t
+     (:foreground ,(amir-dev-color 'yellow)
+                  :weight bold))))
+
+ `(lsp-ui-doc-border
+   ((t
+     (:background ,(amir-dev-color 'border))))))
 
 ;; ============================================================
 ;; Finalize
@@ -511,7 +725,8 @@
         ("modification"   . nil)
         ("documentation"  . nil)
 
-        ("defaultLibrary" . font-lock-type-face)))
+        ;; ("defaultLibrary" . font-lock-type-face)
+	))
 
 
 

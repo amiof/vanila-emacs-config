@@ -131,6 +131,8 @@
   :config
   (setq
    lsp-ui-doc-enable t
+   lsp-ui-doc-include-signature t
+   lsp-ui-doc-markdown-enable t
    lsp-ui-doc-show-with-cursor nil
    lsp-ui-doc-show-with-mouse t
    lsp-ui-doc-position 'at-point
@@ -147,7 +149,7 @@
    lsp-ui-peek-enable t
    lsp-ui-imenu-enable t)
 
-  ;; کلیدهای داکیومنت
+  ;; ;; کلیدهای داکیومنت
   (evil-define-key 'normal lsp-ui-mode-map
     (kbd "F") #'lsp-ui-doc-focus-frame
     (kbd "q") #'lsp-ui-doc-hide))

@@ -11,8 +11,8 @@
 
 
 ;; for read my theme 
-;; (add-to-list 'load-path (expand-file-name "theme" user-emacs-directory))
-;; (add-to-list 'custom-theme-load-path (expand-file-name "theme" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "theme" user-emacs-directory))
+(add-to-list 'custom-theme-load-path (expand-file-name "theme" user-emacs-directory))
 
 
 (require 'bootstrap-config)

@@ -23,10 +23,11 @@
 ;; theme
 (use-package tokyo-night)
 (use-package doom-themes
-  :config
-  (load-theme 'doom-gruvbox t))
+  ;; :config
+  ;; (load-theme 'doom-gruvbox t)
+  )
 
-;; (load-theme 'amir-dev t)
+(load-theme 'amir-dev t)
 
 
 ;; line number
@@ -107,7 +108,7 @@
 
 
 (custom-set-faces
- '(vertico-current ((t (:background "#282c34" :foreground "#51afef" :weight bold)))))
+ '(vertico-current ((t (:background "#282c34" :foreground "#51afef" :weight light)))))
 
 (use-package solaire-mode
   :ensure t
@@ -210,7 +211,8 @@
    indent-bars-width-frac 0.1
    indent-bars-color '(highlight :face-bg t :blend 0.15)
    indent-bars-pattern ".")
-  (indent-bars-treesit-support t))
+  ;; (indent-bars-treesit-support t)
+  )
 
 
 (use-package rainbow-delimiters

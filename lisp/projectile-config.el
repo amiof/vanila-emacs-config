@@ -55,7 +55,7 @@
 
   :config
   (setq projectile-switch-project-action
-        #'projectile-dired))
+        #'project-find-file))
 
 
 (use-package consult-projectile
