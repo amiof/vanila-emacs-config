@@ -10,7 +10,7 @@
 (setq-default pop-up-windows nil)
 
 ;; --- select theme : 'light یا 'dark -----------------------------------------
-(setq nano-header-theme 'dark)    
+(setq nano-header-theme 'gruvbox)    
 
 ;; --- modes for dont show header------------------------------------
 (setq nano-header-excluded-modes
@@ -78,10 +78,17 @@
   (nano-header-set-faces "#ECEFF4" "#2E3440" "#ECEFF4" "#434C5E" "#677691" "#FF6F00")
   (nano-header-install))
 
+(defun nano-header-gruvbox ()
+  "Apply amir-dev colors to header faces only."
+  (interactive)
+  (nano-header-set-faces "#EBDBB2" "#282828" "#FBF1C7" "#504945" "#928374" "#FB4934")
+  (nano-header-install))
+
 ;; --- اعمال تم بر اساس متغیر بالا -------------------------------------------
 (pcase nano-header-theme
   ('dark  (nano-header-dark))
   ('light (nano-header-light))
+  ('gruvbox (nano-header-gruvbox))
   (_      (nano-header-light)))
 
 ;; --- LSP breadcrumb: جلوگیری از override ------------------------------------
