@@ -6,13 +6,13 @@
 ;; Main monospace font (used for all fixed‑width text)
 (set-face-attribute 'default nil
                     :family "JetBrains Mono"
-                    :height 110          ; 15 pt × 10 = 150
+                    :height 106       ; 15 pt × 10 = 150
                     :weight 'semilight)  ; semi‑light → semilight
 
 ;; Variable‑pitch font (used by mixed‑pitch modes, Org, etc.)
 (set-face-attribute 'variable-pitch nil
                     :family "JetBrains Mono"
-                    :height 110)         ; 14 pt
+                    :height 106)         ; 14 pt
 
 (setq inhibit-startup-screen t)
 
@@ -23,11 +23,11 @@
 ;; theme
 (use-package tokyo-night)
 (use-package doom-themes
-  ;; :config
-  ;; (load-theme 'doom-gruvbox t)
+  :config
+  (load-theme 'doom-solarized-dark-high-contrast t)
   )
 
-(load-theme 'amir-dev t)
+;;(load-theme 'amir-dev t)
 
 
 ;; line number
@@ -257,5 +257,29 @@
   :config
   (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
 
+(use-package ligature
+  :config
+  ;; Enable the "www" ligature in every possible major mode
+  (ligature-set-ligatures 't '("www"))
+  ;; Enable traditional ligature support in eww-mode, if the
+  ;; `variable-pitch' face supports it
+  (ligature-set-ligatures 'eww-mode '("ff" "fi" "ffi"))
+  ;; Enable all Cascadia Code ligatures in programming modes
+  (ligature-set-ligatures 'prog-mode '("|||>" "<|||" "<==>" "<!--" "####" "~~>" "***" "||=" "||>"
+                                       ":::" "::=" "=:=" "===" "==>" "=!=" "=>>" "=<<" "=/=" "!=="
+                                       "!!." ">=>" ">>=" ">>>" ">>-" ">->" "->>" "-->" "---" "-<<"
+                                       "<~~" "<~>" "<*>" "<||" "<|>" "<$>" "<==" "<=>" "<=<" "<->"
+                                       "<--" "<-<" "<<=" "<<-" "<<<" "<+>" "</>" "###" "#_(" "..<"
+                                       "..." "+++" "/==" "///" "_|_" "www" "&&" "^=" "~~" "~@" "~="
+                                       "~>" "~-" "**" "*>" "*/" "||" "|}" "|]" "|=" "|>" "|-" "{|"
+                                       "[|" "]#" "::" ":=" ":>" ":<" "$>" "==" "=>" "!=" "!!" ">:"
+                                       ">=" ">>" ">-" "-~" "-|" "->" "--" "-<" "<~" "<*" "<|" "<:"
+                                       "<$" "<=" "<>" "<-" "<<" "<+" "</" "#{" "#[" "#:" "#=" "#!"
+                                       "##" "#(" "#?" "#_" "%%" ".=" ".-" ".." ".?" "+>" "++" "?:"
+                                       "?=" "?." "??" ";;" "/*" "/=" "/>" "//" "__" "~~" "(*" "*)"
+                                       "\\\\" "://"))
+  ;; Enables ligature checks globally in all buffers. You can also do it
+  ;; per mode with `ligature-mode'.
+  (global-ligature-mode t))
 
 (provide 'ui-config)

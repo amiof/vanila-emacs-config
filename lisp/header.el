@@ -10,7 +10,7 @@
 (setq-default pop-up-windows nil)
 
 ;; --- select theme : 'light یا 'dark -----------------------------------------
-(setq nano-header-theme 'gruvbox)    
+(setq nano-header-theme 'dark)    
 
 ;; --- modes for dont show header------------------------------------
 (setq nano-header-excluded-modes
