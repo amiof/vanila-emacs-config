@@ -2,15 +2,15 @@
 
 ;; --- Frame layout -----------------------------------------------------------
 (setq default-frame-alist
-      '((height . 40) (width  . 130) (left-fringe . 0) (right-fringe . 0)
+      '((height . 40) (width  . 160) (left-fringe . 0) (right-fringe . 0)
         (internal-border-width . 20) (vertical-scroll-bars . nil)
         (bottom-divider-width . 0) (right-divider-width . 0)
         (undecorated-round . t)))
 (modify-frame-parameters nil default-frame-alist)
 (setq-default pop-up-windows nil)
 
-;; --- select theme : 'light یا 'dark -----------------------------------------
-(setq nano-header-theme 'dark)    
+;; --- select theme : 'light یا 'dark or gruvbox -----------------------------------------
+(setq nano-header-theme 'gruvbox)    
 
 ;; --- modes for dont show header------------------------------------
 (setq nano-header-excluded-modes

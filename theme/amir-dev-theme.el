@@ -296,6 +296,64 @@
  `(compilation-warning ((t (:foreground ,(amir-dev-color 'warning)))))
  `(compilation-info ((t (:foreground ,(amir-dev-color 'green))))))
 
+
+;; ============================================================
+;; LSP Semantic Token Modifier Faces
+;; Modifiers intentionally preserve the token's semantic color.
+;; ============================================================
+
+(defface amir-dev-semantic-declaration
+  '((t (:weight bold)))
+  "Semantic declaration modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-definition
+  '((t (:weight bold)))
+  "Semantic definition modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-readonly
+  '((t (:slant italic)))
+  "Semantic readonly modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-static
+  '((t (:weight bold)))
+  "Semantic static modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-deprecated
+  '((t (:strike-through t)))
+  "Semantic deprecated modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-abstract
+  '((t (:slant italic)))
+  "Semantic abstract modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-async
+  '((t (:slant italic)))
+  "Semantic async modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-modification
+  '((t (:weight bold)))
+  "Semantic modification modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-documentation
+  '((t (:slant italic)))
+  "Semantic documentation modifier."
+  :group 'amir-dev-theme)
+
+(defface amir-dev-semantic-default-library
+  '((t (:weight bold)))
+  "Semantic default library modifier."
+  :group 'amir-dev-theme)
+
+
+
 ;; ============================================================
 ;; Tree-sitter base faces
 ;; (used when LSP semantic tokens are OFF, e.g. before LSP connects)
@@ -714,19 +772,31 @@
 
 
 
-(setq lsp-semantic-token-modifier-faces
-      '(("declaration"    . nil)
-        ("definition"     . nil)
-        ("readonly"       . nil)
-        ("static"         . nil)
-        ("deprecated"     . nil)
-        ("abstract"       . nil)
-        ("async"          . nil)
-        ("modification"   . nil)
-        ("documentation"  . nil)
+;; (setq lsp-semantic-token-modifier-faces
+;;       '(("declaration"    . nil)
+;;         ("definition"     . nil)
+;;         ("readonly"       . nil)
+;;         ("static"         . nil)
+;;         ("deprecated"     . nil)
+;;         ("abstract"       . nil)
+;;         ("async"          . nil)
+;;         ("modification"   . nil)
+;;         ("documentation"  . nil)
 
-        ;; ("defaultLibrary" . font-lock-type-face)
-	))
+;;         ;; ("defaultLibrary" . font-lock-type-face)
+;; 	))
+
+(setq lsp-semantic-token-modifier-faces
+      '(("declaration"    . amir-dev-semantic-declaration)
+        ("definition"     . amir-dev-semantic-definition)
+        ("readonly"       . amir-dev-semantic-readonly)
+        ("static"         . amir-dev-semantic-static)
+        ("deprecated"     . amir-dev-semantic-deprecated)
+        ("abstract"       . amir-dev-semantic-abstract)
+        ("async"          . amir-dev-semantic-async)
+        ("modification"   . amir-dev-semantic-modification)
+        ("documentation"  . amir-dev-semantic-documentation)
+        ("defaultLibrary" . amir-dev-semantic-default-library)))
 
 
 
