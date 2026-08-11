@@ -121,29 +121,88 @@
 
 (use-package diff-hl
   :ensure t
-  :init
-  (global-diff-hl-mode)
   :config
-  ;; Enable on-the-fly updates as you type
-  (diff-hl-flydiff-mode 1)
+  ;; Show changes on the left side
   (setq diff-hl-side 'left)
-  (setq-default left-fringe-width 3)
-  (setq-default right-fringe-width 8)
-  ;; Integration with Magit (reloads gutter when you commit/stage in Magit)
-  (add-hook 'magit-pre-refresh-hook 'diff-hl-magit-pre-refresh)
-  (add-hook 'magit-post-refresh-hook 'diff-hl-magit-post-refresh)
 
-  ;; Example Keybindings for your configuration:
+  ;; ---------------------------------------------------------------------------
+  ;; Fringe width = 8
+  ;; ---------------------------------------------------------------------------
+  (setq-default left-fringe-width 8
+                right-fringe-width 8)
+
+  (when (display-graphic-p)
+    (modify-frame-parameters nil '((left-fringe . 8)
+                                   (right-fringe . 8))))
+
+  (setq default-frame-alist
+        (append '((left-fringe . 8)
+                  (right-fringe . 8))
+                (assq-delete-all 'left-fringe
+                                 (assq-delete-all 'right-fringe
+                                                  default-frame-alist))))
+
+  ;; ---------------------------------------------------------------------------
+  ;; Custom diff-hl bitmap
+  ;; ---------------------------------------------------------------------------
+  (defun my-diff-hl-define-bitmap (&optional frame)
+    (when (display-graphic-p frame)
+      (let* ((height (max 1 (frame-char-height frame)))
+             (width 4) 
+             (bits (make-vector height (1- (expt 2 width)))))
+        (define-fringe-bitmap 'my-diff-hl-bitmap
+          bits
+          height
+          width
+          'center))))
+
+  (my-diff-hl-define-bitmap)
+  (add-hook 'after-make-frame-functions #'my-diff-hl-define-bitmap)
+
+  (setq diff-hl-fringe-bmp-function
+        (lambda (&rest _args) 'my-diff-hl-bitmap))
+
+  ;; ---------------------------------------------------------------------------
+  ;; Sync diff-hl face backgrounds with active theme
+  ;; ---------------------------------------------------------------------------
+  (defun my-diff-hl-sync-face-backgrounds ()
+    "Set diff-hl face backgrounds to match the current fringe/default background."
+    (when (facep 'diff-hl-insert)
+      (let ((bg (or (face-background 'fringe nil 'default)
+                    (face-background 'default nil 'default)
+                    (frame-parameter nil 'background-color))))
+        (when (stringp bg)
+          (set-face-background 'diff-hl-insert bg)
+          (set-face-background 'diff-hl-delete bg)
+          (set-face-background 'diff-hl-change bg)))))
+
+  (defun my-diff-hl-after-theme-advice (&rest _args)
+    "Reapply diff-hl face backgrounds after theme changes."
+    (my-diff-hl-sync-face-backgrounds))
+
+  (my-diff-hl-sync-face-backgrounds)
+  (add-hook 'after-load-theme-hook #'my-diff-hl-sync-face-backgrounds)
+  (advice-add 'load-theme :after #'my-diff-hl-after-theme-advice)
+  (advice-add 'enable-theme :after #'my-diff-hl-after-theme-advice)
+
+  ;; ---------------------------------------------------------------------------
+  ;; Magit integration
+  ;; ---------------------------------------------------------------------------
+  (add-hook 'magit-pre-refresh-hook #'diff-hl-magit-pre-refresh)
+  (add-hook 'magit-post-refresh-hook #'diff-hl-magit-post-refresh)
+
+  ;; ---------------------------------------------------------------------------
+  ;; Evil keybindings
+  ;; ---------------------------------------------------------------------------
   (with-eval-after-load 'evil
-    ;; Jump between git changes using [c and ]c in normal mode
-    (evil-define-key 'normal 'global (kbd "]c") 'diff-hl-next-hunk)
-    (evil-define-key 'normal 'global (kbd "[c") 'diff-hl-previous-hunk)
-    
-    ;; Leader bindings to show/revert changes (e.g., Space g r to revert)
-    ;; Replace 'general' or 'evil-leader' syntax below with whatever you use:
-					; (evil-define-key 'normal 'global (kbd "SPC g s") 'diff-hl-show-hunk)
-					; (evil-define-key 'normal 'global (kbd "SPC g r") 'diff-hl-revert-hunk)
-    ))
+    (evil-define-key 'normal 'global (kbd "]c") #'diff-hl-next-hunk)
+    (evil-define-key 'normal 'global (kbd "[c") #'diff-hl-previous-hunk))
+
+  ;; ---------------------------------------------------------------------------
+  ;; Enable diff-hl
+  ;; ---------------------------------------------------------------------------
+  (global-diff-hl-mode 1)
+  (diff-hl-flydiff-mode 1))
 
 
 (use-package dashboard
