@@ -126,7 +126,7 @@
 
 (defun neoscroll-scroll (lines &optional opts)
   (let* ((opts (or opts '())) (move-cursor (if (plist-member opts :move-cursor)
-                                                (plist-get opts :move-cursor) t))
+                                               (plist-get opts :move-cursor) t))
          (info (plist-get opts :info)))
     (neoscroll--interrupt)
     (unless (zerop lines)
@@ -277,8 +277,8 @@
 ;; ═════════════════════════════════════════════════════════════════════════════
 
 ;; Rebuild statuscolumn after each neoscroll animation step.
-(advice-add 'neoscroll--scroll-one-step :after
-            (lambda (&rest _) (with-demoted-errors (sc--init))))
+;; (advice-add 'neoscroll--scroll-one-step :after
+;;             (lambda (&rest _) (with-demoted-errors (sc--init))))
 
 (provide 'neoscroll)
 ;; neoscroll.el ends here
