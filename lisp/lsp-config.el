@@ -38,6 +38,7 @@
         (java "https://github.com/tree-sitter/tree-sitter-java")
         (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
         (ruby "https://github.com/tree-sitter/tree-sitter-ruby")
+	(kotlin "https://github.com/fwcd/tree-sitter-kotlin")
         
         ;; Devops / Ops
         (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
@@ -85,7 +86,7 @@
   :config
   (setq
    lsp-auto-guess-root t
-
+   lsp-response-timeout 1
    ;; completion
    lsp-completion-provider :none
    lsp-completion-enable t

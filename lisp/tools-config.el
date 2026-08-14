@@ -395,4 +395,11 @@
   :bind
   ("C-c s" . imenu-list-smart-toggle))
 
+;;added for kotlin maybe dont need 
+(use-package exec-path-from-shell
+  :ensure t
+  :config
+  (exec-path-from-shell-initialize)
+  (exec-path-from-shell-copy-env "JAVA_HOME"))
+
 (provide 'tools-config)

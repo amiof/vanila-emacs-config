@@ -9,7 +9,7 @@
   :ensure t
   :mode (("\\.kt\\'"  . kotlin-ts-mode)
          ("\\.kts\\'" . kotlin-ts-mode))
-  :hook (kotlin-ts-mode . eglot-ensure))
+  :hook (kotlin-ts-mode . lsp))
 
 (provide 'kotlin-lang)
 ;;; kotlin-lang.el ends here

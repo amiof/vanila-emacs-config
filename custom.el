@@ -41,7 +41,7 @@
 
 ;; --- JVM ---
 ;; (require 'scala-lang)          ;; Scala / sbt
-;; (require 'kotlin-lang)         ;; Kotlin
+(require 'kotlin-lang)         ;; Kotlin
 
 ;; --- Functional ---
 ;; (require 'haskell-lang)        ;; Haskell + Cabal

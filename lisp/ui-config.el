@@ -23,11 +23,11 @@
 ;; theme
 (use-package tokyo-night)
 (use-package doom-themes
-  ;; :config
-  ;; (load-theme 'doom-solarized-dark-high-contrast t)
+  :config
+  (load-theme 'doom-gruvbox t)
   )
 
-(load-theme 'amir-dev t)
+;; (load-theme 'amir-dev t)
 
 
 ;; line number

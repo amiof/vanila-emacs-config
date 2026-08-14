@@ -24,42 +24,47 @@
 
           ;; Classic JS/TS
           (js-mode . my/biome)
-          (typescript-mode . my/biome)))
+          (typescript-mode . my/biome)
 
-  :config
-  ;; Use project-local Biome through npx.
-  (setf (alist-get 'my/biome apheleia-formatters)
-        '("npx" "--no-install" "biome"
-          "format"
-          "--stdin-file-path"
-          filepath))
+	  ;;kotlin
+	  (kotlin-ts-mode . ktlint)
+	  (kotlin-mode . ktlint)))
+	
 
-  ;; Keep Apheleia enabled globally so every other language
-  ;; continues to behave normally.
-  (apheleia-global-mode +1)
+	:config
+	;; Use project-local Biome through npx.
+	(setf (alist-get 'my/biome apheleia-formatters)
+              '("npx" "--no-install" "biome"
+		"format"
+		"--stdin-file-path"
+		filepath))
 
-  ;; Detect whether the current project uses Biome.
-  (defun my/biome-project-p ()
-    (let ((dir (or (and buffer-file-name
-                        (file-name-directory buffer-file-name))
-                   default-directory)))
-      (or (locate-dominating-file dir "biome.json")
-          (locate-dominating-file dir "biome.jsonc")
-          (locate-dominating-file dir "node_modules/.bin/biome")
-          (locate-dominating-file dir "node_modules/.bin/biome.cmd")
-          (locate-dominating-file dir "node_modules/.bin/biome.exe"))))
+	;; Keep Apheleia enabled globally so every other language
+	;; continues to behave normally.
+	(apheleia-global-mode +1)
 
-  ;; For JS/TS only:
-  ;; If this isn't a Biome project, disable Apheleia in this buffer.
-  (defun my/maybe-disable-apheleia ()
-    (unless (my/biome-project-p)
-      (apheleia-mode -1)))
+	;; Detect whether the current project uses Biome.
+	(defun my/biome-project-p ()
+	  (let ((dir (or (and buffer-file-name
+                              (file-name-directory buffer-file-name))
+			 default-directory)))
+	    (or (locate-dominating-file dir "biome.json")
+		(locate-dominating-file dir "biome.jsonc")
+		(locate-dominating-file dir "node_modules/.bin/biome")
+		(locate-dominating-file dir "node_modules/.bin/biome.cmd")
+		(locate-dominating-file dir "node_modules/.bin/biome.exe"))))
 
-  (dolist (hook '(js-ts-mode-hook
-                  tsx-ts-mode-hook
-                  typescript-ts-mode-hook
-                  js-mode-hook
-                  typescript-mode-hook))
-    (add-hook hook #'my/maybe-disable-apheleia)))
+	;; For JS/TS only:
+	;; If this isn't a Biome project, disable Apheleia in this buffer.
+	(defun my/maybe-disable-apheleia ()
+	  (unless (my/biome-project-p)
+	    (apheleia-mode -1)))
 
-(provide 'formatter-config)
+	(dolist (hook '(js-ts-mode-hook
+			tsx-ts-mode-hook
+			typescript-ts-mode-hook
+			js-mode-hook
+			typescript-mode-hook))
+	  (add-hook hook #'my/maybe-disable-apheleia)))
+
+  (provide 'formatter-config)
