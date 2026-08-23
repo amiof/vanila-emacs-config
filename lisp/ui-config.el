@@ -282,4 +282,26 @@
   ;; per mode with `ligature-mode'.
   (global-ligature-mode t))
 
+
+;; Enable hl-line in every buffer
+(defun my/enable-hl-line ()
+  "Enable hl-line in the current buffer."
+  (hl-line-mode 1))
+
+(add-hook 'after-change-major-mode-hook #'my/enable-hl-line)
+
+(defun my/hl-line-by-evil-state ()
+  "Disable hl-line in Evil visual state."
+  (if (evil-visual-state-p)
+      (hl-line-mode -1)
+    (hl-line-mode 1)))
+
+
+;; Evil state changes
+(add-hook 'evil-normal-state-entry-hook #'my/hl-line-by-evil-state)
+(add-hook 'evil-insert-state-entry-hook #'my/hl-line-by-evil-state)
+(add-hook 'evil-replace-state-entry-hook #'my/hl-line-by-evil-state)
+(add-hook 'evil-visual-state-entry-hook #'my/hl-line-by-evil-state)
+
+
 (provide 'ui-config)
