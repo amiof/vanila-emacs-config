@@ -89,8 +89,7 @@ on your system.
 ### Setup
 
 ```bash
-git clone https://github.com/amiof/vanila-emacs-config.git ~/.emacs.d
-emacs
+git clone https://github.com/amiof/vanila-emacs-config.git ~/.config/emacs
 ```
 
 On first launch Chadmacs bootstraps itself:
